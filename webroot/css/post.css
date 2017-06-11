@@ -1,30 +1,38 @@
 body {
-	background: #eee;
-	color: #999;
+	background-image: url("/img/paper_bk.jpg");
 	margin: 10px 0px;
 }
 
-#header{
+#header {
 	font-size: 18pt;
 	font-weight: bold;
 	margin: 10px;
 }
 
-#content{
-	background: #fff;
+#content {
 	color: #999;
 	padding: 10px 25px 30px 25px;
 	font-size: 14pt;
 }
 
-#footer{
+#footer {
 	text-align: right;
 	font-size: 12pt;
 	margin: 10pt;
 }
 
-h1{
+h1 {
 	color: #aaa;
 	font-size: 24pt;
 	margin: 20pt 0pt 50pt 0pt;
+}
+
+.index_img {
+	background-image: url("/img/frame.jpg");
+	padding: 41px;
+	margin: 40px;
+}
+
+.count {
+	background-color: white;
 }
