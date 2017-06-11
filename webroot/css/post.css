@@ -36,3 +36,7 @@ h1 {
 .count {
 	background-color: white;
 }
+
+.result_img {
+	position: relative;
+}

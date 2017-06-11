@@ -24,8 +24,6 @@ document.getElementById("target").addEventListener("click", function(e) {
 	$myIMG = document.getElementById("myIMG")
 	$myIMG.style.left = (offsetX - 9) + 'px';
 	$myIMG.style.top = offsetY + 'px';
-	console.log(document.getElementById("myIMG").style.left);
-	console.log(document.getElementById("myIMG").style.top);
 	document.getElementById("roc_x").value = offsetX - 9;
 	document.getElementById("roc_y").value = offsetY;
 } ) ;

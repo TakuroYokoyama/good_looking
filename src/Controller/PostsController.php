@@ -33,13 +33,18 @@ class PostsController extends AppController {
     public function result() {
         $data = $this->Posts->find('all');
         $count = array();
+        $img = array();
         for($i = 1;$i < 7;$i++) {
             $check = $this->Posts->findAllByPerson_no($i);
             if($check != null) {
                 $count[$i] = $check->count();
+                $img[$i] = $check; 
+                // for($j = 0;$ < $check->count();$j++) {
+                // }
             }
         }
         $this->set('count', $count);
+        $this->set('img', $img);
     }
 
     public function complete() {
