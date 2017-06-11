@@ -2,18 +2,12 @@
 namespace App\Controller;
  
 use App\Controller\AppController;
- 
-class PostsController extends AppController {
-	public function initialize() {
-		$this->name = 'Posts';
-		$this->viewBuilder()->autoLayout(true);
-		$this->viewBuilder()->layout('post');
-	}
-    public function index() {
 
+class PointsController extends AppController {
+    public function index() {
     }
 
-    public function vote99() {
+    public function vote1() {
     	$data = $this->Posts->find('all');
     	$this->set('data',$data);
     	$this->set('entity', $this->Posts->newEntity());

@@ -4,7 +4,8 @@
 		<tbody>
 				<tr>
 					<td>
-						<?= $this->Html->link($this->Html->image('1.jpg'),array('controller'=>'posts','action'=>'vote'),array('escape'=>false)); ?>
+						<?= $this->Html->link($this->Html->image('99.jpg'),array('controller'=>'posts','action'=>'vote99'),array('escape'=>false)); ?>
+				<!--
 					</td>
 					<td>
 						<?= $this -> Html -> image('2.jpg'); ?>
@@ -23,6 +24,7 @@
 					<td>
 						<?= $this -> Html -> image('6.jpg'); ?>
 					</td>
+				-->
 				</tr>
 		</tbody>
 	</table>
