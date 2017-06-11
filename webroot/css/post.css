@@ -29,14 +29,41 @@ h1 {
 
 .index_img {
 	background-image: url("/img/frame.jpg");
-	padding: 41px;
-	margin: 40px;
+	background-size: cover;
+	padding: 40px;
+	width: 300px;
+	height: 480px;
 }
 
-.count {
+.counter {
 	background-color: white;
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
 }
 
 .result_img {
 	position: relative;
+}
+
+.thanks {
+	color: orange;
+	text-align: center;
+	margin: auto;
+}
+
+.complete {
+	margin: auto;
+}
+
+.vote_img {
+	background-image: url("/img/frame.jpg");
+	background-size: cover;
+	padding: 40px;
+	margin: auto;
+	width: 300px;
+}
+
+#target {
+	margin: auto;
 }

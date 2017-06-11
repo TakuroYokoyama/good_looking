@@ -1,6 +1,6 @@
 <div>
 	<h2></h2>
-	<table>
+	<table cellspacing="40px">
 		<tbody>
 			<tr>
 				<td class="index_img">

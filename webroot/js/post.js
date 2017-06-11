@@ -22,10 +22,12 @@ document.getElementById("target").addEventListener("click", function(e) {
 	console.log(offsetX);
 	console.log(offsetY);
 	$myIMG = document.getElementById("myIMG")
-	$myIMG.style.left = (offsetX - 9) + 'px';
-	$myIMG.style.top = offsetY + 'px';
-	document.getElementById("roc_x").value = offsetX - 9;
-	document.getElementById("roc_y").value = offsetY - 7;
+	$myIMG.style.left = (mouseX - 9) + 'px';
+	$myIMG.style.top = (mouseY - 7) + 'px';
+	document.getElementById("roc_x").value = offsetX;
+	document.getElementById("roc_y").value = offsetY;
+	console.log(document.getElementById("roc_x").value);
+	console.log(document.getElementById("roc_y").value);
 } ) ;
 
 function postValue() {

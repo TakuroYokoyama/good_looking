@@ -1,6 +1,6 @@
 <div>
 	<h2></h2>
-	<table>
+	<table cellspacing="40px">
 		<tbody>
 				<tr>
 					<td class="index_img">
@@ -26,13 +26,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="count">
+					<td class="counter">
 						<?=$count[1] ?>
 					</td>
-					<td class="count">
+					<td class="counter">
 						<?=$count[2] ?>
 					</td>
-					<td class="count">
+					<td class="counter">
 						<?=$count[3] ?>
 					</td>					
 				</tr>
@@ -61,13 +61,13 @@
 					</td>
 				</tr>
 				<tr>
-					<td class="count">
+					<td class="counter">
 						<?=$count[4] ?>
 					</td>
-					<td class="count">
+					<td class="counter">
 						<?=$count[5] ?>
 					</td>
-					<td class="count">
+					<td class="counter">
 						<?=$count[6] ?>
 					</td>					
 				</tr>

@@ -26,8 +26,8 @@ class PostsController extends AppController {
     	if($this->request->is('post')) {
     		$post = $this->Posts->newEntity($this->request->data);
     		$this->Posts->save($post);
+            return $this->redirect(['action' => 'complete']);
     	}
-    	return $this->redirect(['action' => 'complete']);
     }
 
     public function result() {
@@ -39,8 +39,6 @@ class PostsController extends AppController {
             if($check != null) {
                 $count[$i] = $check->count();
                 $img[$i] = $check; 
-                // for($j = 0;$ < $check->count();$j++) {
-                // }
             }
         }
         $this->set('count', $count);
