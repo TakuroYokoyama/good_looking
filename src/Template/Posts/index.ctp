@@ -9,7 +9,7 @@
 					<td class="index_img">
 						<?=$this->Html->link($this->Html->image('2.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'2'),array('escape'=>false)); ?>
 					</td>
-					<td class="index_img"><td>
+					<td class="index_img">
 						<?=$this->Html->link($this->Html->image('3.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'3'),array('escape'=>false)); ?>
 					</td>
 				</tr>
