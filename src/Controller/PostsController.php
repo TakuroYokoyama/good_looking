@@ -13,9 +13,13 @@ class PostsController extends AppController {
 
     }
 
-    public function vote99() {
+    public function vote() {
     	$data = $this->Posts->find('all');
-    	$this->set('data',$data);
+    	$imgpath = $this->request->query('value') . '.jpg';
+    	$person_no = $this->request->query('value');
+    	$this->set('data', $data);
+    	$this->set('imgpath', $imgpath);
+    	$this->set('person_no', $person_no);
     	$this->set('entity', $this->Posts->newEntity());
     }
 

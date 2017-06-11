@@ -6,11 +6,11 @@
 		<?=$this->fetch('title') ?>
 	</title>
 	<?php
-	echo $this->Html->css('post.index');
-	//echo $this->Html->script('cake.hello');
+	echo $this->Html->css('post');
+	echo $this->Html->script('post');
 	echo $this->fetch('meta');
 	echo $this->fetch('css');
-	//echo $this->fetch('script');
+	echo $this->fetch('script');
 	?>
 </head>
 <body>

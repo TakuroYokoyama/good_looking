@@ -3,28 +3,26 @@
 	<table>
 		<tbody>
 				<tr>
-					<td>
-						<?= $this->Html->link($this->Html->image('99.jpg'),array('controller'=>'posts','action'=>'vote99'),array('escape'=>false)); ?>
-				<!--
+					<td class="index_img">
+						<?=$this->Html->link($this->Html->image('99.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'99'),array('escape'=>false)); ?>
 					</td>
-					<td>
-						<?= $this -> Html -> image('2.jpg'); ?>
+					<td class="index_img">
+						<?=$this->Html->link($this->Html->image('2.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'2'),array('escape'=>false)); ?>
 					</td>
-					<td>
-						<?= $this -> Html -> image('3.jpg'); ?>
+					<td class="index_img"><td>
+						<?=$this->Html->link($this->Html->image('3.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'3'),array('escape'=>false)); ?>
 					</td>
 				</tr>
 				<tr>
-					<td>
-						<?= $this -> Html -> image('4.jpg'); ?>
+					<td class="index_img">
+						<?=$this->Html->link($this->Html->image('4.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'4'),array('escape'=>false)); ?>
 					</td>
-					<td>
-						<?= $this -> Html -> image('5.jpg'); ?>
+					<td class="index_img">
+						<?=$this->Html->link($this->Html->image('5.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'5'),array('escape'=>false)); ?>
 					</td>
-					<td>
-						<?= $this -> Html -> image('6.jpg'); ?>
+					<td class="index_img">
+						<?=$this->Html->link($this->Html->image('6.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'6'),array('escape'=>false)); ?>
 					</td>
-				-->
 				</tr>
 		</tbody>
 	</table>
