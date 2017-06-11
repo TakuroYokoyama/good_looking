@@ -38,8 +38,8 @@ class PostsController extends AppController {
             if($check != null) {
                 $count[$i] = $check->count();
             }
-            $this->set('count', $count);
         }
+        $this->set('count', $count);
     }
 
     public function complete() {
