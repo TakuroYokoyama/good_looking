@@ -73,4 +73,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<?=$this->Form->create('',['url'=>['action'=>'index']]) ?>
+	<?=$this->Form->button('TOPに戻る',array('class'=>'btn btn-primary center-block')) ?>
+	<?=$this->Form->end() ?>
 </div>

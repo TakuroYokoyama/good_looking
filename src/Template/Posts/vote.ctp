@@ -11,4 +11,7 @@
 	<?=$this->Form->hidden('roc_y', array('id'=>'roc_y', 'value'=>'0')) ?>
 	<?=$this->Form->button('投票する', array('class'=>'btn btn-danger center-block')) ?>
 	<?=$this->Form->end() ?>
+	<?=$this->Form->create('',['url'=>['action'=>'index']]) ?>
+	<?=$this->Form->button('考え直す',array('class'=>'btn btn-info center-block')) ?>
+	<?=$this->Form->end() ?>
 </div>

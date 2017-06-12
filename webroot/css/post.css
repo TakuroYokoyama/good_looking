@@ -54,6 +54,7 @@ h1 {
 
 .complete {
 	margin: auto;
+	height: 1000px;
 }
 
 .vote_img {
@@ -71,4 +72,8 @@ h1 {
 
 button {
 	margin-top :20px;
+}
+
+td {
+	margin: auto;
 }
