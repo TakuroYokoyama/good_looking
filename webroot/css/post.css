@@ -61,9 +61,14 @@ h1 {
 	background-size: cover;
 	padding: 40px;
 	margin: auto;
-	width: 300px;
+	width: 380px;
+	height: 560px;
 }
 
 #target {
 	margin: auto;
+}
+
+button {
+	margin-top :20px;
 }
