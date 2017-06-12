@@ -11,6 +11,7 @@ class PostsController extends AppController {
 	}
     public function index() {
         $list = array(1,2,3,4,5,6);
+        shuffle($list);
         $this->set('list', $list);
     }
 

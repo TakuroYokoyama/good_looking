@@ -5,7 +5,6 @@
 </div>
 </div>
 <div>
-	<br>
 	<?=$this->Form->create($entity,['url'=>['action'=>'addRecord']]) ?>
 	<?=$this->Form->hidden('person_no',array('id'=>'person_no', 'value'=>$person_no)) ?>
 	<?=$this->Form->hidden('roc_x', array('id'=>'roc_x', 'value'=>'0')) ?>
