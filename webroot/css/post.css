@@ -74,6 +74,8 @@ button {
 	margin-top :20px;
 }
 
-td {
+.wrapper {
+	width: 1140px;
 	margin: auto;
 }
+

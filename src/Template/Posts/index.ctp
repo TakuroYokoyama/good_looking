@@ -1,4 +1,4 @@
-<div>
+<div class="wrapper">
 	<h2></h2>
 	<table>
 		<tbody>
