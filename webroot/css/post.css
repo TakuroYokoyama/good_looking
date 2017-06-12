@@ -66,6 +66,13 @@ h1 {
 	height: 560px;
 }
 
+.logo_frame {
+	background-image: url("/img/frame_logo.jpg");
+	background-size: cover;
+	width: 1140px;
+	height: 330px;
+}
+
 #target {
 	margin: auto;
 }

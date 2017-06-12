@@ -1,4 +1,7 @@
 <div class="wrapper">
+	<div class="logo_frame">
+		<?=$this->Html->image('logo.gif', array('class'=>'center-block')); ?>
+	</div>
 	<h2></h2>
 	<table>
 		<tbody>
