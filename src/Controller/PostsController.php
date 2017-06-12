@@ -10,6 +10,8 @@ class PostsController extends AppController {
 		$this->viewBuilder()->layout('post');
 	}
     public function index() {
+        $list = array(1,2,3,4,5,6);
+        $this->set('list', $list);
     }
 
     public function vote() {

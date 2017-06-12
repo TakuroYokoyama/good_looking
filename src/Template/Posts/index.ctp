@@ -2,28 +2,19 @@
 	<h2></h2>
 	<table cellspacing="40px">
 		<tbody>
-			<tr>
+			<?php foreach ($list as $obj): ?>
+			<?php
+			if((($obj + 3) % 3) == 1 ) {
+				echo "<tr>";
+			}; ?>
 				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('1.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'1'),array('escape'=>false)); ?>
+					<a href=/posts/vote?value=<?=$obj ?>> <img src=/img/<?=$obj ?>.jpg>
 				</td>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('2.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'2'),array('escape'=>false)); ?>
-				</td>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('3.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'3'),array('escape'=>false)); ?>
-				</td>
-			</tr>
-			<tr>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('4.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'4'),array('escape'=>false)); ?>
-				</td>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('5.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'5'),array('escape'=>false)); ?>
-				</td>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('6.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'6'),array('escape'=>false)); ?>
-				</td>
-				</tr>
+			<?php
+			if(($obj % 3) == 0 ) {
+				echo "</tr>";
+			}; ?>
+			<?php endforeach; ?>
 		</tbody>
 	</table>
 </div>
