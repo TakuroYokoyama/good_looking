@@ -54,6 +54,7 @@ h1 {
 
 .complete {
 	margin: auto;
+	height: 1000px;
 }
 
 .vote_img {
@@ -61,9 +62,27 @@ h1 {
 	background-size: cover;
 	padding: 40px;
 	margin: auto;
-	width: 300px;
+	width: 380px;
+	height: 560px;
+}
+
+.logo_frame {
+	background-image: url("/img/frame_logo.jpg");
+	background-size: cover;
+	width: 1140px;
+	height: 330px;
 }
 
 #target {
 	margin: auto;
 }
+
+button {
+	margin-top :20px;
+}
+
+.wrapper {
+	width: 1140px;
+	margin: auto;
+}
+

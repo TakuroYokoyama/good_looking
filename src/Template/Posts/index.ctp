@@ -1,29 +1,30 @@
-<div>
+<div class="wrapper">
+	<div class="logo_frame">
+		<?=$this->Html->image('logo.gif', array('class'=>'center-block')); ?>
+	</div>
 	<h2></h2>
-	<table cellspacing="40px">
+	<table>
 		<tbody>
-			<tr>
+			<?php
+			$i = 0;
+			foreach ($list as $obj):
+			$i++; ?>
+			<?php
+			if((($i + 3) % 3) == 1 ) {
+				echo "<tr>";
+			}; ?>
 				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('1.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'1'),array('escape'=>false)); ?>
+					<a href=/posts/vote?value=<?=$obj ?>> <img src=/img/<?=$obj ?>.jpg>
 				</td>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('2.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'2'),array('escape'=>false)); ?>
-				</td>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('3.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'3'),array('escape'=>false)); ?>
-				</td>
-			</tr>
-			<tr>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('4.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'4'),array('escape'=>false)); ?>
-				</td>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('5.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'5'),array('escape'=>false)); ?>
-				</td>
-				<td class="index_img">
-					<?=$this->Html->link($this->Html->image('6.jpg'),array('controller'=>'posts','action'=>'vote','value'=>'6'),array('escape'=>false)); ?>
-				</td>
-				</tr>
+			<?php
+			if(($i % 3) == 0 ) {
+				echo "</tr>";
+			}; 
+			?>
+			<?php endforeach; ?>
 		</tbody>
 	</table>
+	<?=$this->Form->create('',['url'=>['action'=>'result']]) ?>
+	<?=$this->Form->button('結果を見る',array('class'=>'btn btn-success center-block')) ?>
+	<?=$this->Form->end() ?>
 </div>
