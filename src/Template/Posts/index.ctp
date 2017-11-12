@@ -17,7 +17,7 @@
 					<a href=/posts/vote?value=<?=$obj ?>> <img src=/img/<?=$obj ?>.jpg>
 				</td>
 			<?php
-			if(($i % 3) == 0 ) {
+			if((($i % 3) == 0) || ($obj === end($list))) {
 				echo "</tr>";
 			}; 
 			?>
