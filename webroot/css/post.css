@@ -1,6 +1,11 @@
+/*
+全体設定
+*/
+
 body {
 	background-image: url("/img/paper_bk.jpg");
 	margin: 10px 0px;
+	width: 100%;
 }
 
 #header {
@@ -27,13 +32,66 @@ h1 {
 	margin: 20pt 0pt 50pt 0pt;
 }
 
-.index_img {
+.wrapper {
+	width: 1140px;
+	margin: auto;
+}
+
+button {
+	margin-top :20px;
+}
+
+/*
+index.ctp
+トップページ
+*/
+
+#title2017 {
+	width: 100%;
+}
+
+/*
+select.ctp
+一覧ページ
+*/
+
+.logo_frame {
+	background-image: url("/img/frame_logo.jpg");
+	background-size: cover;
+	width: 1140px;
+	height: 330px;
+}
+
+.select_img {
 	background-image: url("/img/frame.jpg");
 	background-size: cover;
 	padding: 40px;
 	width: 300px;
 	height: 480px;
 }
+
+/*
+投票ページ
+vote.ctp
+*/
+
+.vote_img {
+	background-image: url("/img/frame.jpg");
+	background-size: cover;
+	padding: 40px;
+	margin: auto;
+	width: 380px;
+	height: 560px;
+}
+
+#target {
+	margin: auto;
+}
+
+/*
+result.ctp
+結果ページ
+*/
 
 .counter {
 	background-color: white;
@@ -46,6 +104,11 @@ h1 {
 	position: relative;
 }
 
+/*
+完了ページ
+complete.ctp
+*/
+
 .thanks {
 	color: orange;
 	text-align: center;
@@ -56,33 +119,3 @@ h1 {
 	margin: auto;
 	height: 1000px;
 }
-
-.vote_img {
-	background-image: url("/img/frame.jpg");
-	background-size: cover;
-	padding: 40px;
-	margin: auto;
-	width: 380px;
-	height: 560px;
-}
-
-.logo_frame {
-	background-image: url("/img/frame_logo.jpg");
-	background-size: cover;
-	width: 1140px;
-	height: 330px;
-}
-
-#target {
-	margin: auto;
-}
-
-button {
-	margin-top :20px;
-}
-
-.wrapper {
-	width: 1140px;
-	margin: auto;
-}
-
