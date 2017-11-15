@@ -24,10 +24,10 @@ document.getElementById("target").addEventListener("click", function(e) {
 	$myIMG = document.getElementById("myIMG")
 	$myIMG.style.left = (mouseX - 9) + 'px';
 	$myIMG.style.top = (mouseY - 7) + 'px';
-	document.getElementById("roc_x").value = offsetX - 9;
-	document.getElementById("roc_y").value = offsetY - 7;
-	console.log(document.getElementById("roc_x").value);
-	console.log(document.getElementById("roc_y").value);
+	document.getElementById("roc_x").value = Math.round(offsetX - 9);
+	document.getElementById("roc_y").value = Math.round(offsetY - 7);
+	console.log("roc_x"+document.getElementById("roc_x").value);
+	console.log("roc_y"+document.getElementById("roc_y").value);
 } ) ;
 
 function postValue() {
