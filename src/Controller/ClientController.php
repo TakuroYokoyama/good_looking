@@ -5,12 +5,14 @@ use App\Controller\AppController;
 
 class ClientController extends AppController{
     public function initialize(){
+        ////cakephpデフォルトデザイン初期化
         $this->name = "Client";
         $this->autoRender = true;
         $this->viewBuilder()->autoLayout(false);
     }
 
-    public function index() {  
+    public function index() {
+        //login画面にリダイレクトする(method名とctp名をあわせるため)  
         return $this->redirect(['action' => "login"]);
     }
 
@@ -22,6 +24,7 @@ class ClientController extends AppController{
         $idAdmin = "administrator";
         $passAdmin = "admin";
 
+        //ログインチェック
         if($this->request->is('post')){
             if( strcmp($id,$idAdmin) == 0 && strcmp($pass,$passAdmin) == 0){
                 return $this->redirect(['action' => "aggregate"]);
