@@ -37,4 +37,22 @@ class ClientController extends AppController{
     public function aggregate() {  
         
     }
+
+    public function regist()
+    {
+    	$str = $this->request->data('initial');
+  		$msg = $str;
+  		if ($str == null) 
+    		{ $msg = "登録したい社員情報を入力してください"; }
+  		$this->set('message', $msg);
+    }
+
+    public function addEmployeeRecord() {
+    	if($this->request->is('post')) {
+    		$post = $this->Clients->newEntity($this->request->data);
+    		$this->Clients->save($post);
+            return ;
+    	}
+    }
+
 }
