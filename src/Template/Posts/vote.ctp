@@ -14,4 +14,7 @@
         <?=$this->Form->button('投票する！', array('class'=>'btn btn-danger center-block')) ?>
         <?=$this->Form->end() ?>
     </div>
+    <?php
+    	echo $this->Html->script('vote');
+    ?>
 </div>
