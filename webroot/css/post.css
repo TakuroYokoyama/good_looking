@@ -5,7 +5,6 @@
 body {
 	background-image: url("/img/paper_bk.jpg");
 	margin: 10px 0px;
-	width: 100%;
 }
 
 #header {
@@ -43,15 +42,6 @@ button {
 
 /*
 index.ctp
-トップページ
-*/
-
-#title2017 {
-	width: 100%;
-}
-
-/*
-select.ctp
 一覧ページ
 */
 
@@ -62,7 +52,7 @@ select.ctp
 	height: 330px;
 }
 
-.select_img {
+.index_img {
 	background-image: url("/img/frame.jpg");
 	background-size: cover;
 	padding: 40px;
@@ -71,8 +61,8 @@ select.ctp
 }
 
 /*
-投票ページ
 vote.ctp
+投票ページ
 */
 
 .vote_img {
@@ -105,8 +95,8 @@ result.ctp
 }
 
 /*
-完了ページ
 complete.ctp
+完了ページ
 */
 
 .thanks {
@@ -119,3 +109,33 @@ complete.ctp
 	margin: auto;
 	height: 1000px;
 }
+
+.vote_img {
+	background-image: url("/img/frame.jpg");
+	background-size: cover;
+	padding: 40px;
+	margin: auto;
+	width: 380px;
+	height: 560px;
+}
+
+.logo_frame {
+	background-image: url("/img/frame_logo.jpg");
+	background-size: cover;
+	width: 1140px;
+	height: 330px;
+}
+
+#target {
+	margin: auto;
+}
+
+button {
+	margin-top :20px;
+}
+
+.wrapper {
+	width: 1140px;
+	margin: auto;
+}
+
