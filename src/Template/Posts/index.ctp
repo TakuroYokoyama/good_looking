@@ -19,12 +19,9 @@
 			<?php
 			if((($i % 3) == 0) || ($obj === end($list))) {
 				echo "</tr>";
-			}; 
+			};
 			?>
 			<?php endforeach; ?>
 		</tbody>
 	</table>
-	<?=$this->Form->create('',['url'=>['action'=>'result']]) ?>
-	<?=$this->Form->button('結果を見る',array('class'=>'btn btn-success center-block')) ?>
-	<?=$this->Form->end() ?>
 </div>
