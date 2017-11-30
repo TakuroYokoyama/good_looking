@@ -14,7 +14,7 @@
 					<div class='result_img' style="background-image : url('/img/2.jpg');width: 300px;height: 480px;">
 					<?php foreach ($img[2] as $obj2): ?>
 						<img src="/img/heart.gif" style="position:absolute;top: <?=$obj2->roc_y ?>px;left: <?=$obj2->roc_x ?>px;" >
-					<?php endforeach; ?>						
+					<?php endforeach; ?>
 					</div>
 				</td>
 				<td class="index_img">
@@ -24,6 +24,13 @@
 					<?php endforeach; ?>
 					</div>
 				</td>
+				<td class="index_img">
+                    <div class='result_img' style="background-image : url('/img/4.jpg');width: 300px;height: 480px;">
+                        <?php foreach ($img[4] as $obj4): ?>
+                            <img src="/img/heart.gif" style="position:absolute;top: <?=$obj4->roc_y ?>px;left: <?=$obj4->roc_x ?>px;" >
+                        <?php endforeach; ?>
+                    </div>
+                </td>
 			</tr>
 			<tr>
 				<td class="counter">
@@ -34,42 +41,56 @@
 				</td>
 				<td class="counter">
 					<?=$count[3] ?>
-				</td>					
+				</td>
+				<td class="counter">
+					<?=$count[4] ?>
+				</td>
 			</tr>
 			<tr>
-				<td class="index_img">
-					<div class='result_img' style="background-image : url('/img/4.jpg');width: 300px;height: 480px;">
-					<?php foreach ($img[4] as $obj4): ?>
-						<img src="/img/heart.gif" style="position:absolute;top: <?=$obj4->roc_y ?>px;left: <?=$obj4->roc_x ?>px;" >
-					<?php endforeach; ?>
-
-					</div>
-				</td>
 				<td class="index_img">
 					<div class='result_img' style="background-image : url('/img/5.jpg');width: 300px;height: 480px;">
 					<?php foreach ($img[5] as $obj5): ?>
 						<img src="/img/heart.gif" style="position:absolute;top: <?=$obj5->roc_y ?>px;left: <?=$obj5->roc_x ?>px;" >
-					<?php endforeach; ?>						
+					<?php endforeach; ?>
 					</div>
 				</td>
 				<td class="index_img">
 					<div class='result_img' style="background-image : url('/img/6.jpg');width: 300px;height: 480px;">
 					<?php foreach ($img[6] as $obj6): ?>
 						<img src="/img/heart.gif" style="position:absolute;top: <?=$obj6->roc_y ?>px;left: <?=$obj6->roc_x ?>px;" >
-					<?php endforeach; ?>						
+					<?php endforeach; ?>
 					</div>
 				</td>
+				<td class="index_img">
+					<div class='result_img' style="background-image : url('/img/7.jpg');width: 300px;height: 480px;">
+					<?php foreach ($img[7] as $obj7): ?>
+						<img src="/img/heart.gif" style="position:absolute;top: <?=$obj7->roc_y ?>px;left: <?=$obj7->roc_x ?>px;" >
+					<?php endforeach; ?>
+					</div>
+				</td>
+				<td class="index_img">
+					<div class='result_img' style="background-image : url('/img/8.jpg');width: 300px;height: 480px;">
+					<?php foreach ($img[8] as $obj8): ?>
+						<img src="/img/heart.gif" style="position:absolute;top: <?=$obj8->roc_y ?>px;left: <?=$obj8->roc_x ?>px;" >
+					<?php endforeach; ?>
+					</div>
+				</td>
+
 			</tr>
 			<tr>
-				<td class="counter">
-					<?=$count[4] ?>
 				</td>
 				<td class="counter">
 					<?=$count[5] ?>
 				</td>
 				<td class="counter">
 					<?=$count[6] ?>
-				</td>					
+				</td>
+				<td class="counter">
+					<?=$count[7] ?>
+				</td>
+				<td class="counter">
+					<?=$count[8] ?>
+				</td>
 			</tr>
 		</tbody>
 	</table>

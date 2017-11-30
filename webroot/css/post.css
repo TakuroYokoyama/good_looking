@@ -27,13 +27,27 @@ h1 {
 	margin: 20pt 0pt 50pt 0pt;
 }
 
+table {
+    margin: auto;
+}
+
 .index_img {
 	background-image: url("/img/frame.jpg");
-	background-size: cover;
-	padding: 40px;
-	width: 300px;
-	height: 480px;
+	background-size: contain;
+	padding: 12px;
+	max-width: 264px;
+	max-height: 422px;
 }
+
+.index_img img {
+    max-width: 200px;
+    max-height: 320px;
+}
+
+.result_img {
+     max-width: 200px;
+     max-height: 320px;
+ }
 
 .counter {
 	background-color: white;

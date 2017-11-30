@@ -1,8 +1,8 @@
 <?php
 namespace App\Controller;
- 
+
 use App\Controller\AppController;
- 
+
 class PostsController extends AppController {
 	public function initialize() {
 		$this->name = 'Posts';
@@ -10,7 +10,7 @@ class PostsController extends AppController {
 		$this->viewBuilder()->layout('post');
 	}
     public function index() {
-        $list = array(1,2,3,4,5,6);
+        $list = array(1,2,3,4,5,6,7,8);
         shuffle($list);
         $this->set('list', $list);
     }
@@ -37,11 +37,11 @@ class PostsController extends AppController {
         $data = $this->Posts->find('all');
         $count = array();
         $img = array();
-        for($i = 1;$i < 7;$i++) {
+        for($i = 1;$i < 9;$i++) {
             $check = $this->Posts->findAllByPerson_no($i);
             if($check != null) {
                 $count[$i] = $check->count();
-                $img[$i] = $check; 
+                $img[$i] = $check;
             }
         }
         $this->set('count', $count);
