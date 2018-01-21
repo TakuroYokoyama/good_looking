@@ -56,10 +56,6 @@ class ClientsTable extends Table
             ->allowEmpty('press_return');
 
         $validator
-            ->requirePresence('img_name', 'create')
-            ->notEmpty('img_name');
-
-        $validator
             ->boolean('del_flg')
             ->requirePresence('del_flg', 'create')
             ->notEmpty('del_flg');
