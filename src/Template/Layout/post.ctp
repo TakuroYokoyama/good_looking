@@ -26,8 +26,5 @@
 		<?=$this->fetch('content') ?>
 	</div>
 	<div id="footer"></div>
-	<?php
-	echo $this->Html->script('post');
-	?>
 </body>
 </html>
