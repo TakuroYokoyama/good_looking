@@ -9,7 +9,6 @@ use Cake\ORM\Entity;
  * @property int $person_no
  * @property string $name_initial
  * @property int $press_return
- * @property string $img_name
  * @property bool $del_flg
  */
 class Client extends Entity
