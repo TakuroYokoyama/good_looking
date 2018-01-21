@@ -2,15 +2,27 @@
 namespace App\Controller;
  
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
  
 class PostsController extends AppController {
 	public function initialize() {
-		$this->name = 'Posts';
+        // postsテーブルとclientsテーブルを使用するためTableRegistryでインスタンスを作成する
+        parent::initialize();
+        // $this->Posts = TableRegistry::get('posts');
+        $this->Employees = TableRegistry::get('clients');
 		$this->viewBuilder()->autoLayout(true);
 		$this->viewBuilder()->layout('post');
 	}
     public function index() {
-        $list = array(1,2,3,4,5,6);
+        // 社員テーブルから現在の社員数を取得
+        $data = $this->Employees->find('all', [
+            'conditions'=>['del_flg = 0']
+            ]);
+        $list = array();
+        for($i = 1;$i <= ($data->count());$i++) {
+            array_push($list,$i);
+        }
+        // 並び順で有利不利の無いようシャッフルする
         shuffle($list);
         $this->set('list', $list);
     }
@@ -34,10 +46,13 @@ class PostsController extends AppController {
     }
 
     public function result() {
+        $employee = $this->Employees->find('all', [
+            'conditions'=>['del_flg = 0']
+            ]);
         $data = $this->Posts->find('all');
         $count = array();
         $img = array();
-        for($i = 1;$i < 7;$i++) {
+        for($i = 1;$i <= ($employee->count());$i++) {
             $check = $this->Posts->findAllByPerson_no($i);
             if($check != null) {
                 $count[$i] = $check->count();
