@@ -6,10 +6,10 @@ use Cake\ORM\TableRegistry;
  
 class PostsController extends AppController {
 	public function initialize() {
-        // postsテーブルとEmployeesテーブルを使用するためTableRegistryでインスタンスを作成する
+        // postsテーブルとclientsテーブルを使用するためTableRegistryでインスタンスを作成する
         parent::initialize();
         // $this->Posts = TableRegistry::get('posts');
-        $this->Employees = TableRegistry::get('employees');
+        $this->Employees = TableRegistry::get('clients');
 		$this->viewBuilder()->autoLayout(true);
 		$this->viewBuilder()->layout('post');
 	}
