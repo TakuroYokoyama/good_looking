@@ -15,7 +15,7 @@ class PostsController extends AppController {
 	}
     public function index() {
         // 社員テーブルから現在の社員数を取得
-        $data = $this->Employees->find('all', [
+        $data = $this->Clients->find('all', [
             'conditions'=>['del_flg = 0']
             ]);
         $list = array();
@@ -46,13 +46,13 @@ class PostsController extends AppController {
     }
 
     public function result() {
-        $employee = $this->Employees->find('all', [
+        $client = $this->Clients->find('all', [
             'conditions'=>['del_flg = 0']
             ]);
         $data = $this->Posts->find('all');
         $count = array();
         $img = array();
-        for($i = 1;$i <= ($employee->count());$i++) {
+        for($i = 1;$i <= ($client->count());$i++) {
             $check = $this->Posts->findAllByPerson_no($i);
             if($check != null) {
                 $count[$i] = $check->count();
