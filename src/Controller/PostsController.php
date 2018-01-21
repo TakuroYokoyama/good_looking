@@ -9,7 +9,7 @@ class PostsController extends AppController {
         // postsテーブルとclientsテーブルを使用するためTableRegistryでインスタンスを作成する
         parent::initialize();
         // $this->Posts = TableRegistry::get('posts');
-        $this->Employees = TableRegistry::get('clients');
+        $this->Clients = TableRegistry::get('clients');
 		$this->viewBuilder()->autoLayout(true);
 		$this->viewBuilder()->layout('post');
 	}
