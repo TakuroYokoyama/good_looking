@@ -5,10 +5,11 @@ use App\Controller\AppController;
 
 class ClientsController extends AppController{
     public function initialize(){
-        ////cakephpデフォルトデザイン初期化
+        //cakephpデフォルトデザイン初期化
         $this->name = "Clients";
         $this->autoRender = true;
         $this->viewBuilder()->autoLayout(false);
+        header('Content-Type: application/json');
     }
 
     public function index() {
@@ -35,7 +36,17 @@ class ClientsController extends AppController{
     }
 
     public function aggregate() {  
-        
+        $this->viewBuilder()->className('Aggregate');
+
+        $a = isset($this->request->data['filter']) ? $this->request->data['filter'] : "aaa";
+        $this->set("test", $a);
+        if ($this->request->is(['ajax'])) {
+            $this->set("test", "success");
+        }
+        // if($this->request->is('post')) {
+        //     $post = $this->Posts->newEntity($this->request->data);
+        //     $this->set("test", $post);
+        // }
     }
 
     public function regist()
