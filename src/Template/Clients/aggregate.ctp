@@ -11,10 +11,10 @@
         <div>
             <?= $this->Form->input( "dataFilter", 
                                         ["type" => "select",
-                                         "options" => ["votedesc"  => "得票数：降順",
-                                                       "voteasc"  => "得票数：昇順",
-                                                       "voteman"   => "得票数：性別(男)",
-                                                       "votewoman" => "得票数：性別(女)"
+                                         "options" => ["desc"  => "得票数：降順",
+                                                       "asc"  => "得票数：昇順",
+                                                       "man"   => "得票数：性別(男)",
+                                                       "woman" => "得票数：性別(女)"
                                                       ],
                                         "id"    => "dataFilter",
                                         "onChange" => "getFilterValue()",

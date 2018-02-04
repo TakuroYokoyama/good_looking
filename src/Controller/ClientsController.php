@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Datasource\ConnectionManager;
 
 class ClientsController extends AppController{
     public function initialize(){
@@ -20,6 +21,7 @@ class ClientsController extends AppController{
     public function login() {  
         $id = $this->request->data('id');
         $pass = $this->request->data('pass');
+        $connection = ConnectionManager::get('default');
         
         //ログインできるユーザ・パスワードを固定
         $idAdmin = "administrator";
@@ -37,11 +39,15 @@ class ClientsController extends AppController{
 
     public function aggregate() {  
         $this->viewBuilder()->className('Aggregate');
+        error_reporting(E_ALL);
+        ini_set('display_errors', '1');
 
         if($this->request->is('post')){
             $dataFilterName = $this->request->data('dataFilter');
 
             if($dataFilterName === 'desc'){
+                $results = $this->$connection->execute('SELECT * FROM posts')->fetchAll('assoc');
+                print_r($results);
 
             } elseif($dataFilterName === 'asc'){
 
