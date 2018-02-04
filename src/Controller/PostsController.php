@@ -5,7 +5,7 @@ use App\Controller\AppController;
  
 class PostsController extends AppController {
 	public function initialize() {
-		$this->name = 'Posts';
+		$this->name = 'Posts';//initialize Postsの対象の名前
 		$this->viewBuilder()->autoLayout(true);
 		$this->viewBuilder()->layout('post');
 	}
@@ -19,19 +19,20 @@ class PostsController extends AppController {
     	$data = $this->Posts->find('all');
     	$imgpath = $this->request->query('value') . '.jpg';
     	$person_no = $this->request->query('value');
-    	$this->set('data', $data);
+        $this->set('data', $data);
     	$this->set('imgpath', $imgpath);
     	$this->set('person_no', $person_no);
     	$this->set('entity', $this->Posts->newEntity());
-    }
+    }        
 
     public function addRecord() {
-    	if($this->request->is('post')) {
-    		$post = $this->Posts->newEntity($this->request->data);
-    		$this->Posts->save($post);
-            return $this->redirect(['action' => 'complete']);
+        //univ = $this->request->data('univ');
+       // $name_initial = $this->request->data('name_initial');
+        $record = $this->Posts->newEntity($this->request->data);//newEntityでテーブルの形。フォームから受け取った値。いま操作しているインスタンス。newEntityでテーブルの形。
+    	$this->Posts->save($record);
+        return $this->redirect(['action' => 'complete']);
     	}
-    }
+    
 
     public function result() {
         $data = $this->Posts->find('all');
