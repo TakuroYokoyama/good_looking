@@ -11,8 +11,7 @@
 	<?php endif; ?>
 	<?= $this->Form->input('id',["type"=>"text","label"=>"ID:"]); ?>
 	<?=	$this->Form->input("pass",["type"=>"password","label"=>"パスワード:"]);?>
-	<?=	$this->Form->button('Login')?>
-	<?php $login ?>
+	<?=	$this->Form->button('Login');?>
 <?= $this->Form->end(); ?>
 </body>
 </html>

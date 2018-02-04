@@ -38,15 +38,19 @@ class ClientsController extends AppController{
     public function aggregate() {  
         $this->viewBuilder()->className('Aggregate');
 
-        $a = isset($this->request->data['filter']) ? $this->request->data['filter'] : "aaa";
-        $this->set("test", $a);
-        if ($this->request->is(['ajax'])) {
-            $this->set("test", "success");
+        if($this->request->is('post')){
+            $dataFilterName = $this->request->data('dataFilter');
+
+            if($dataFilterName === 'desc'){
+
+            } elseif($dataFilterName === 'asc'){
+
+            } elseif($dataFilterName === 'man'){
+
+            } elseif($dataFilterName === 'woman'){
+
+            }
         }
-        // if($this->request->is('post')) {
-        //     $post = $this->Posts->newEntity($this->request->data);
-        //     $this->set("test", $post);
-        // }
     }
 
     public function regist()

@@ -2,34 +2,14 @@
 <head>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
-<script>
-    function getFilterValue(){
-        var str = document.getElementById("dataFilter").value;
-        $.ajax({
-            type: "POST",
-            data: {filter: $("#dataFilter").val()},
-            url: "/clients/aggregate",
-         })
-        //ステータスコードは正常で、dataTypeで定義したようにパース出来たとき
-        .done(function (response) {
-            alert('成功');
-            console.log(response);
-        })
-        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            console.log("ajax通信に失敗しました");
-            console.log("XMLHttpRequest : " + XMLHttpRequest.status);
-            console.log("textStatus     : " + textStatus);
-            console.log("errorThrown    : " + errorThrown.message);
-        });
-    }
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>グラフ</title>
 </head>
 <body>
-	<h1>グラフ画面</h1>
+    <?= $this->Form->create("login",['url'=>['action'=>'aggregate', 'type'=>'post']]) ?>
+    	<h1>グラフ画面</h1>
         <div>
-            <?=$this->Form->input( "dataFilter", 
+            <?= $this->Form->input( "dataFilter", 
                                         ["type" => "select",
                                          "options" => ["votedesc"  => "得票数：降順",
                                                        "voteasc"  => "得票数：昇順",
@@ -40,11 +20,12 @@
                                         "onChange" => "getFilterValue()",
                                         ])
             ?>
+            <?= $this->Form->button('表示', [ "name" => "sort" ]); ?>
         </div>
-        <p><?= $test ?></p>
         <div>
 	       <canvas id="myChart" width="100px" height="500px"></canvas>
         </div>
+    <?= $this->Form->end(); ?>
 </body>
 
 <script>
