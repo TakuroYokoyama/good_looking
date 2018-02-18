@@ -39,14 +39,26 @@ class ClientsController extends AppController{
 
     public function aggregate() {  
         $this->viewBuilder()->className('Aggregate');
-        error_reporting(E_ALL);
-        ini_set('display_errors', '1');
 
-        $clients = $this->Clients->find('all');
+        $connection = ConnectionManager::get('default');
+        $results = $connection->query('SELECT c.name_initial, COUNT(*) 
+                                        FROM posts p 
+                                        INNER JOIN clients c 
+                                        ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');    
 
-        $this->set("clients", $clients);
-        $this->set("labels", "1");
-        $this->set("graphData", "1");
+        $labels = array();
+        $graphDatas = array();
+        foreach ($results as $result) {
+            array_push($labels, "\"".$result['name_initial']."\"");
+            array_push($graphDatas, (int)$result['COUNT(*)']);
+        }
+
+        $labels = implode(",", $labels);
+        $graphDatas = implode(",", $graphDatas);
+
+        $this->set("labels", $labels);
+        $this->set("graphDatas", $graphDatas);
+
         // if($this->request->is('post')){
         //     $dataFilterName = $this->request->data('dataFilter');
 

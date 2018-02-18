@@ -26,20 +26,16 @@
 	       <canvas id="myChart" width="100px" height="500px"></canvas>
         </div>
     <?= $this->Form->end(); ?>
-    <p><?= $clients ?></p>
 </body>
 
 <script>
-var labels = <?= $labels ?>;
-var graphData = <?= $graphData ?>;
-
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: [labels],
+        labels: [<?= $labels ?>],
         datasets: [{
-            data: [graphData],
+            data: [<?= $graphDatas ?>],
             backgroundColor: [
                 'rgba(255,  99, 132, 1)',
                 'rgba( 54, 162, 235, 1)',
