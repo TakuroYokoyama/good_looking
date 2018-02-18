@@ -41,16 +41,18 @@ class ClientsController extends AppController{
         $this->viewBuilder()->className('Aggregate');
 
         $connection = ConnectionManager::get('default');
-        $results = $connection->query('SELECT c.name_initial, COUNT(*) 
-                                        FROM posts p 
-                                        INNER JOIN clients c 
-                                        ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');    
+        $results = $connection->query('SELECT c.name_initial, COUNT(*) as vote
+                                            FROM posts p 
+                                            INNER JOIN clients c 
+                                            ON p.person_no = c.person_no 
+                                            GROUP BY p.person_no
+                                            ORDER BY vote DESC;')->fetchAll('assoc');    
 
         $labels = array();
         $graphDatas = array();
         foreach ($results as $result) {
             array_push($labels, "\"".$result['name_initial']."\"");
-            array_push($graphDatas, $result['COUNT(*)']);
+            array_push($graphDatas, $result['vote']);
         }
 
         $labels = implode(",", $labels);
@@ -67,29 +69,52 @@ class ClientsController extends AppController{
 
         if($sortType === 'desc'){
             $connection = ConnectionManager::get('default');
-            $results = $connection->query('SELECT c.name_initial, COUNT(*) 
+            $results = $connection->query('SELECT c.name_initial, COUNT(*) as vote
                                             FROM posts p 
                                             INNER JOIN clients c 
-                                            ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');
+                                            ON p.person_no = c.person_no 
+                                            GROUP BY p.person_no
+                                            ORDER BY vote DESC;')->fetchAll('assoc');
         } elseif($sortType === 'asc'){
             $connection = ConnectionManager::get('default');
-            $results = $connection->query('SELECT c.name_initial, COUNT(*) 
+            $results = $connection->query('SELECT c.name_initial, COUNT(*) as vote 
                                             FROM posts p 
                                             INNER JOIN clients c 
-                                            ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');
+                                            ON p.person_no = c.person_no 
+                                            GROUP BY p.person_no
+                                            ORDER BY vote ASC;')->fetchAll('assoc');
         } elseif($sortType === 'man'){
             $connection = ConnectionManager::get('default');
-            $results = $connection->query('SELECT c.name_initial, COUNT(*) 
+            $results = $connection->query('SELECT p.id, p.gender, c.name_initial, COUNT(*) as vote 
                                             FROM posts p 
                                             INNER JOIN clients c 
-                                            ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');
+                                            ON p.person_no = c.person_no 
+                                            WHERE gender = 0
+                                            GROUP BY p.person_no
+                                            ORDER BY vote DESC;')->fetchAll('assoc');
         } elseif($sortType === 'woman'){
             $connection = ConnectionManager::get('default');
-            $results = $connection->query('SELECT c.name_initial, COUNT(*) 
+            $results = $connection->query('SELECT p.id, p.gender, c.name_initial, COUNT(*) as vote 
                                             FROM posts p 
                                             INNER JOIN clients c 
-                                            ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');
+                                            ON p.person_no = c.person_no 
+                                            WHERE gender = 1
+                                            GROUP BY p.person_no
+                                            ORDER BY vote DESC;')->fetchAll('assoc');
         }
+
+        $labels = array();
+        $graphDatas = array();
+        foreach ($results as $result) {
+            array_push($labels, "\"".$result['name_initial']."\"");
+            array_push($graphDatas, $result['COUNT(*)']);
+        }
+
+        $labels = implode(",", $labels);
+        $graphDatas = implode(",", $graphDatas);
+
+        $this->set("labels", $labels);
+        $this->set("graphDatas", $graphDatas);
     }
 
     public function regist()
