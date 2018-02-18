@@ -26,24 +26,20 @@
 	       <canvas id="myChart" width="100px" height="500px"></canvas>
         </div>
     <?= $this->Form->end(); ?>
+    <p><?= $clients ?></p>
 </body>
 
 <script>
-
-$(document).ready(function() {
-    $("#dataFilter").on("DOMSubtreeModified propertychange", function() {
-        var str = document.getElementById("dataFilter").value;
-        alert(str);
-    });
-});
+var labels = <?= $labels ?>;
+var graphData = <?= $graphData ?>;
 
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "aaa", "ccc"],
+        labels: [labels],
         datasets: [{
-            data: [12, 10, 3, 5, 15, 3, 7, 7, 7, 7],
+            data: [graphData],
             backgroundColor: [
                 'rgba(255,  99, 132, 1)',
                 'rgba( 54, 162, 235, 1)',

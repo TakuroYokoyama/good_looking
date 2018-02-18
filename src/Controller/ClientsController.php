@@ -42,21 +42,26 @@ class ClientsController extends AppController{
         error_reporting(E_ALL);
         ini_set('display_errors', '1');
 
-        if($this->request->is('post')){
-            $dataFilterName = $this->request->data('dataFilter');
+        $clients = $this->Clients->find('all');
 
-            if($dataFilterName === 'desc'){
-                $results = $this->$connection->execute('SELECT * FROM posts')->fetchAll('assoc');
-                print_r($results);
+        $this->set("clients", $clients);
+        $this->set("labels", "1");
+        $this->set("graphData", "1");
+        // if($this->request->is('post')){
+        //     $dataFilterName = $this->request->data('dataFilter');
 
-            } elseif($dataFilterName === 'asc'){
+        //     if($dataFilterName === 'desc'){
+        //         $results = $this->$connection->execute('SELECT * FROM posts')->fetchAll('assoc');
+        //         print_r($results);
 
-            } elseif($dataFilterName === 'man'){
+        //     } elseif($dataFilterName === 'asc'){
 
-            } elseif($dataFilterName === 'woman'){
+        //     } elseif($dataFilterName === 'man'){
 
-            }
-        }
+        //     } elseif($dataFilterName === 'woman'){
+
+        //     }
+        // }
     }
 
     public function regist()
