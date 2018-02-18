@@ -4,10 +4,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>グラフ</title>
+<script>
+    function getFilterValue(){
+        var str = document.getElementById("dataFilter").value;
+        $.ajax({
+            type: "POST",
+            data: {filter: $("#dataFilter").val()},
+            url: "/clients/sortGraph",
+         })
+        //ステータスコードは正常で、dataTypeで定義したようにパース出来たとき
+        .done(function (data) {
+            console.log('成功');
+            console.log(data);
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            console.log("ajax通信に失敗しました");
+            console.log("XMLHttpRequest : " + XMLHttpRequest.status);
+            console.log("textStatus     : " + textStatus);
+            console.log("errorThrown    : " + errorThrown.message);
+            console.log(location.pathname);
+        });
+    }
+</script>
 </head>
 <body>
-    <?= $this->Form->create("login",['url'=>['action'=>'aggregate', 'type'=>'post']]) ?>
-    	<h1>グラフ画面</h1>
+	<h1>グラフ画面</h1>
+    <?= $this->Form->create("sort",['url'=>['action'=>'aggregate', 'type'=>'post']]) ?>
         <div>
             <?= $this->Form->input( "dataFilter", 
                                         ["type" => "select",
@@ -22,10 +44,10 @@
             ?>
             <?= $this->Form->button('表示', [ "name" => "sort" ]); ?>
         </div>
-        <div>
-	       <canvas id="myChart" width="100px" height="500px"></canvas>
-        </div>
     <?= $this->Form->end(); ?>
+    <div>
+       <canvas id="myChart" width="100px" height="500px"></canvas>
+    </div>
 </body>
 
 <script>

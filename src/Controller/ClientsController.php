@@ -50,7 +50,7 @@ class ClientsController extends AppController{
         $graphDatas = array();
         foreach ($results as $result) {
             array_push($labels, "\"".$result['name_initial']."\"");
-            array_push($graphDatas, (int)$result['COUNT(*)']);
+            array_push($graphDatas, $result['COUNT(*)']);
         }
 
         $labels = implode(",", $labels);
@@ -58,22 +58,38 @@ class ClientsController extends AppController{
 
         $this->set("labels", $labels);
         $this->set("graphDatas", $graphDatas);
+    }
 
-        // if($this->request->is('post')){
-        //     $dataFilterName = $this->request->data('dataFilter');
+    public function sortGraph(){
+        $this->render("aggregate");
 
-        //     if($dataFilterName === 'desc'){
-        //         $results = $this->$connection->execute('SELECT * FROM posts')->fetchAll('assoc');
-        //         print_r($results);
+        $sortType = $_POST['filter'];
 
-        //     } elseif($dataFilterName === 'asc'){
-
-        //     } elseif($dataFilterName === 'man'){
-
-        //     } elseif($dataFilterName === 'woman'){
-
-        //     }
-        // }
+        if($sortType === 'desc'){
+            $connection = ConnectionManager::get('default');
+            $results = $connection->query('SELECT c.name_initial, COUNT(*) 
+                                            FROM posts p 
+                                            INNER JOIN clients c 
+                                            ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');
+        } elseif($sortType === 'asc'){
+            $connection = ConnectionManager::get('default');
+            $results = $connection->query('SELECT c.name_initial, COUNT(*) 
+                                            FROM posts p 
+                                            INNER JOIN clients c 
+                                            ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');
+        } elseif($sortType === 'man'){
+            $connection = ConnectionManager::get('default');
+            $results = $connection->query('SELECT c.name_initial, COUNT(*) 
+                                            FROM posts p 
+                                            INNER JOIN clients c 
+                                            ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');
+        } elseif($sortType === 'woman'){
+            $connection = ConnectionManager::get('default');
+            $results = $connection->query('SELECT c.name_initial, COUNT(*) 
+                                            FROM posts p 
+                                            INNER JOIN clients c 
+                                            ON p.person_no = c.person_no GROUP BY p.person_no;')->fetchAll('assoc');
+        }
     }
 
     public function regist()
