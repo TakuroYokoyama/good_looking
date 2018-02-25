@@ -52,15 +52,15 @@
         createGraph();
     });
 
-    function createGraph(labels, graphDatas){
+    function createGraph(){
         var ctx = document.getElementById("myChart").getContext('2d');
 
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [labels],
+                labels: [<?= $labels ?>],
                 datasets: [{
-                    data: [graphDatas],
+                    data: [<?= $graphDatas ?>],
                     backgroundColor: [
                         'rgba(255,  99, 132, 1)',
                         'rgba( 54, 162, 235, 1)',
