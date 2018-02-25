@@ -63,7 +63,6 @@ class ClientsController extends AppController{
     }
 
     public function sortGraph(){
-        $this->render("aggregate");
 
         $sortType = $_POST['filter'];
 
@@ -107,7 +106,7 @@ class ClientsController extends AppController{
         $graphDatas = array();
         foreach ($results as $result) {
             array_push($labels, "\"".$result['name_initial']."\"");
-            array_push($graphDatas, $result['COUNT(*)']);
+            array_push($graphDatas, $result['vote']);
         }
 
         $labels = implode(",", $labels);
@@ -115,6 +114,7 @@ class ClientsController extends AppController{
 
         $this->set("labels", $labels);
         $this->set("graphDatas", $graphDatas);
+        $this->render("aggregate");
     }
 
     public function regist()
