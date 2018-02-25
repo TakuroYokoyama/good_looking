@@ -30,7 +30,7 @@
 	?>-->
 	</P>
 	<p>学校名　　 <?=$this->Form->text('univ',array('id'=>'univ')) ?></p>
-	<!<?=$this->Form->hidden('name_initial',array('id'=>'name_initial','value'=>$name)) ?>
+	<!--<?=$this->Form->hidden('name_initial',array('id'=>'name_initial','value'=>$name)) ?>-->
 	<!--<p>イニシャル <?=$this->Form->text('name_initial',array('id'=>'name_initial')) ?></p>-->
 	<?php
 	$options = array('0'=>'男性', '1'=>'女性');
