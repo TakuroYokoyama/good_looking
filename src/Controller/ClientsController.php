@@ -59,10 +59,11 @@ class ClientsController extends AppController{
         $graphDatas = implode(",", $graphDatas);
 
         $this->set("labels", $labels);
-        $this->set("graphDatas", $graphDatas);
+        $this->set("graphData", $graphDatas);
     }
 
     public function sortGraph(){
+        $this->viewBuilder()->className('Aggregate');
 
         $sortType = $_POST['filter'];
 
@@ -114,7 +115,9 @@ class ClientsController extends AppController{
 
         $this->set("labels", $labels);
         $this->set("graphDatas", $graphDatas);
-        $this->render("aggregate");
+        echo json_encode($results);
+
+        $this->autoRender = false;
     }
 
     public function regist()

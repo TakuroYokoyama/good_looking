@@ -9,15 +9,20 @@
         var str = document.getElementById("dataFilter").value;
         $.ajax({
             type: "POST",
-            dataType:'html',
+            dataType:'json',
             data: {filter: $("#dataFilter").val()},
             url: "/clients/sortGraph",
          })
         .done(function (data) {
-            $("#myChart").remove();
-            $('.graphArea').append('<canvas id="myChart" width="100px" height="500px"></canvas>');
-            createGraph();
-            console.log(data);
+            var labels;
+            var graphData;
+
+            Object.keys(data).forEach(function(key){
+                labels.push(data["key"]);
+            })
+
+            createGraph(labels, graphData);
+            console.log(data["name_initial"]);
         })
         .fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("グラフの表示に失敗しました。");
@@ -46,21 +51,16 @@
        <canvas id="myChart" width="100px" height="500px"></canvas>
     </div>
 </body>
-<script>
-
-    $(document).ready( function (){
-        createGraph();
-    });
-
-    function createGraph(){
+<script id="createGraph">
+    function createGraph( labels, graphData){
         var ctx = document.getElementById("myChart").getContext('2d');
 
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: [<?= $labels ?>],
+                labels: labels,
                 datasets: [{
-                    data: [<?= $graphDatas ?>],
+                    data: graphData,
                     backgroundColor: [
                         'rgba(255,  99, 132, 1)',
                         'rgba( 54, 162, 235, 1)',
@@ -98,5 +98,8 @@
         });
     }
 
+</script>
+<script>
+    createGraph([<?= $labels ?>], [<?= $graphData ?>]);
 </script>
 </html>
