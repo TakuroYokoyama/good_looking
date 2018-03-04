@@ -56,4 +56,26 @@ class ClientsController extends AppController{
     	}
     }
 
+    public function detail(){
+        if($this->request->is('post')) {
+            //社員番号取得
+            $post = $this->Clients->newEntity($this->request->data);
+            $id = $post['person_no'];
+         }
+         else{
+            //不正アクセスの場合、ログイン画面に戻す
+            return  $this->redirect(['action' => 'login']);
+        }
+        //社員情報取得
+        $clientsData = $this->Clients->find()->where(['person_no' => $id])->first();
+        $connection = ConnectionManager::get('default');
+        $postsData = $connection->query('SELECT COUNT(*) AS votes FROM posts WHERE person_no = '.$id.';')->fetchAll('assoc');
+
+        //表示値をセット
+        $this->set('id', $clientsData['person_no']);
+        $this->set('name', $clientsData['name_initial']);
+        $this->set('return', $clientsData['press_return']);
+        $this->set('vote', $postsData[0]['votes']);
+        $this->set('entity', $this->Clients->newEntity());
+    }
 }
