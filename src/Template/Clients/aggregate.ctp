@@ -33,8 +33,7 @@
 </head>
 <body>
 	<h1>グラフ画面</h1>
-    <?= $this->Form->create("sort",['url'=>['action'=>'aggregate', 'type'=>'post']]) ?>
-        <div>
+        <div class="filterArea">
             <?= $this->Form->input( "dataFilter", 
                                         ["type" => "select",
                                          "options" => ["desc"  => "得票数：降順",
@@ -47,9 +46,17 @@
                                         ])
             ?>
         </div>
-    <?= $this->Form->end(); ?>
     <div class="graphArea">
        <canvas id="myChart" width="100px" height="500px"></canvas>
+    </div>
+    <div class="editArea">
+        <?= $this->Form->select( "dataFilter", $employeeData);?>
+        <?= $this->Form->create("detail",['url'=>['action'=>'detail', 'type'=>'post']]) ?>
+            <?= $this->Form->button('編集');?>
+        <?= $this->Form->end(); ?>
+        <?= $this->Form->create("detail",['url'=>['action'=>'detail', 'type'=>'post']]) ?>
+            <?= $this->Form->button('新規登録');?>
+        <?= $this->Form->end(); ?>
     </div>
 </body>
 <script>

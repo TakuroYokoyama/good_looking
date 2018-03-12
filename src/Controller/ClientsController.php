@@ -18,6 +18,10 @@ class ClientsController extends AppController{
         return $this->redirect(['action' => "login"]);
     }
 
+    
+    /**
+        ログイン画面
+    */
     public function login() {  
         $id = $this->request->data('id');
         $pass = $this->request->data('pass');
@@ -37,11 +41,14 @@ class ClientsController extends AppController{
          }
     }
 
+    /**
+        グラフ画面
+    */
     public function aggregate() {  
         $this->viewBuilder()->className('Aggregate');
 
         $connection = ConnectionManager::get('default');
-        $results = $connection->query('SELECT c.name_initial, COUNT(*) as vote
+        $results = $connection->query('SELECT c.name_initial, COUNT(*) as vote, c.person_no
                                             FROM posts p 
                                             INNER JOIN clients c 
                                             ON p.person_no = c.person_no 
@@ -50,9 +57,11 @@ class ClientsController extends AppController{
 
         $labels = array();
         $graphDatas = array();
+        $employee = array();
         foreach ($results as $result) {
             array_push($labels, "\"".$result['name_initial']."\"");
             array_push($graphDatas, $result['vote']);
+            $employee += array($result['person_no'] => $result['name_initial']);
         }
 
         $labels = implode(",", $labels);
@@ -60,8 +69,13 @@ class ClientsController extends AppController{
 
         $this->set("labels", $labels);
         $this->set("graphData", $graphDatas);
+        $this->set("employeeData", $employee);
     }
 
+    /**
+        グラフソートメソッド
+        Ajaxで呼ばれる
+    */
     public function sortGraph(){
         $this->viewBuilder()->className('Aggregate');
 

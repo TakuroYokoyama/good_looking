@@ -1,8 +1,7 @@
     function createGraph(labels, graphData){
-        console.log(labels);
         $("#myChart").remove();
         $('.graphArea').append('<canvas id="myChart" width="100px" height="500px"></canvas>');
-        // var number = graphData.join(',');
+        
         var ctx = document.getElementById("myChart").getContext('2d');
 
         var myChart = new Chart(ctx, {
