@@ -39,25 +39,32 @@ class ClientsController extends AppController{
     }
 
     public function regist()
-    {
-        //テスト実装(idを渡される想定)
-        $number = 5;
+    {    
         //社員情報の新規登録/編集分岐
-  		if ($number == null) 
-    		{   
-                //表示する文言を追加
-                $title = "社員情報登録";
-                $msg = "社員情報を入力してください";
-                $pass ="";
-            }
-        else
-            {   
+  		if($this->request->is('post')) {  
+                $post = $this->Clients->newEntity($this->request->data);
+                $clientsData = $this->Clients->find()->where(['person_no' => $post['person_no']])->first();
                 //表示する文言を追加
                 $title = "社員情報編集";
                 $msg = "社員情報を修正してください";
                 //画像表示用
-                $pass = "<img src=/img/".$number.".jpg>";
-            }    
+                $id = $clientsData['person_no'];
+                $pass = "<img src=/img/".$id.".jpg>";
+                $name = $clientsData['name_initial'];
+                $class = "hide";
+        }
+        else{   
+                //表示する文言を追加
+                $title = "社員情報登録";
+                $msg = "社員情報を入力してください";
+                $id = NULL;
+                $pass = "";
+                $name = NULL;
+                $class = "del";
+        }
+        $this->set('id', $id);
+        $this->set('name', $name);
+        $this->set('class', $name);
   		$this->set('message', $msg);
         $this->set('title', $title);
         $this->set('pass', $pass);
@@ -76,6 +83,18 @@ class ClientsController extends AppController{
             //編集画面に戻る
             return  $this->redirect(['action' => 'regist']);
     	}
+    }
+
+     public function delEmployeeRecord() {
+        if($this->request->is('post')) {
+            //レコード削除処理
+            $post = $this->Clients->newEntity($this->request->data);
+            $this->Clients->deleteAll(['person_no' => $post['person_no']]); 
+            //画像削除処理
+            file_exists('img/'.$post['person_no']);
+            //ログイン画面に戻る
+            return  $this->redirect(['action' => 'login']);
+        }
     }
 
 }
