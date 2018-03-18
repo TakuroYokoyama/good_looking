@@ -67,8 +67,9 @@
             </li>
         </ul>
     </div>
-</body>
+
 <script>
     createGraph([<?= $labels ?>], [<?= $graphData ?>]);
 </script>
+</body>
 </html>
