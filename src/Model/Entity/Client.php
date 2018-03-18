@@ -25,6 +25,5 @@ class Client extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'person_no' => false
     ];
 }
