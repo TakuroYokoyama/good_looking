@@ -52,7 +52,7 @@
     </div>
     <div class="editArea">
         <ul>
-            <?= $this->Form->create("detail",['url'=>['action'=>'aggregate', 'type'=>'post']]) ?>
+            <?= $this->Form->create("detail",['url'=>['action'=>'detail', 'type'=>'post']]) ?>
             <li>
                 <?= $this->Form->select( "person_no", $employeeData);?>
             </li>
