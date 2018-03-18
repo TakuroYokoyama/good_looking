@@ -20,7 +20,7 @@ class ClientsController extends AppController{
 
     
     /**
-        ログイン画面
+    *    ログイン画面
     */
     public function login() {  
         $id = $this->request->data('id');
@@ -42,7 +42,7 @@ class ClientsController extends AppController{
     }
 
     /**
-        グラフ画面
+    *    グラフ画面
     */
     public function aggregate() {  
         $this->viewBuilder()->className('Aggregate');
@@ -73,8 +73,8 @@ class ClientsController extends AppController{
     }
 
     /**
-        グラフソートメソッド
-        Ajaxで呼ばれる
+    *    グラフソートメソッド
+    *    Ajaxで呼ばれる
     */
     public function sortGraph(){
         $this->viewBuilder()->className('Aggregate');
