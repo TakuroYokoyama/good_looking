@@ -59,8 +59,7 @@ class ClientsController extends AppController{
     public function detail(){
         if($this->request->is('post')) {
             //社員番号取得
-            $post = $this->Clients->newEntity($this->request->data);
-            $id = $post['person_no'];
+            $id = $this->request->data('person_no');
          }
          else{
             //不正アクセスの場合、ログイン画面に戻す
