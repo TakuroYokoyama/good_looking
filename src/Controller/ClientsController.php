@@ -42,29 +42,26 @@ class ClientsController extends AppController{
     {    
         //社員情報の新規登録/編集分岐
   		if($this->request->is('post')) {  
-                $post = $this->Clients->newEntity($this->request->data);
-                $clientsData = $this->Clients->find()->where(['person_no' => $post['person_no']])->first();
-                //表示する文言を追加
-                $title = "社員情報編集";
-                $msg = "社員情報を修正してください";
-                //画像表示用
-                $id = $clientsData['person_no'];
-                $pass = "<img src=/img/".$id.".jpg>";
-                $name = $clientsData['name_initial'];
-                $class = "hide";
+            $person_no = $this->request->data('person_no');
+            $clientsData = $this->Clients->find()->where(['person_no' => $person_no])->first();
+            //表示する文言を追加
+            $title = "社員情報編集";
+            $msg = "社員情報を修正してください";
+            //画像表示用
+            $id = $clientsData['person_no'];
+            $pass = "<img src=/img/".$id.".jpg>";
+            $name = $clientsData['name_initial'];
         }
         else{   
-                //表示する文言を追加
-                $title = "社員情報登録";
-                $msg = "社員情報を入力してください";
-                $id = NULL;
-                $pass = "";
-                $name = NULL;
-                $class = "del";
+            //表示する文言を追加
+            $title = "社員情報登録";
+            $msg = "社員情報を入力してください";
+            $id = NULL;
+            $pass = "";
+            $name = NULL;
         }
         $this->set('id', $id);
         $this->set('name', $name);
-        $this->set('class', $name);
   		$this->set('message', $msg);
         $this->set('title', $title);
         $this->set('pass', $pass);
