@@ -11,7 +11,7 @@
 	<div align = "left" style="border-bottom: 2px solid #ff3333;font-size: 120%;">基本情報</div>
 	<div>
 		<P>
-		姓: 
+		姓:
 		<?php
 			$f_name = array('A'=>'A','B'=>'B','C'=>'C','D'=>'D','E'=>'E','F'=>'F','G'=>'G','H'=>'H','I'=>'I','J'=>'J','K'=>'K','L'=>'L','M'=>'M','N'=>'N','O'=>'O','P'=>'P','Q'=>'Q','R'=>'R','S'=>'S','T'=>'T','U'=>'U','V'=>'V','W'=>'W','X'=>'X','Y'=>'Y','Z'=>'Z');
 			echo $this->Form->select('f_name',$f_name,array('legend' => false,'default' => 'A'));

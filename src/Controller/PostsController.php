@@ -1,16 +1,28 @@
 <?php
 namespace App\Controller;
- 
+
 use App\Controller\AppController;
- 
+use Cake\ORM\TableRegistry;
+
 class PostsController extends AppController {
 	public function initialize() {
-		$this->name = 'Posts';//initialize Postsの対象の名前
+        // postsテーブルとclientsテーブルを使用するためTableRegistryでインスタンスを作成する
+        parent::initialize();
+        // $this->Posts = TableRegistry::get('posts');
+        $this->Clients = TableRegistry::get('clients');
 		$this->viewBuilder()->autoLayout(true);
 		$this->viewBuilder()->layout('post');
 	}
     public function index() {
-        $list = array(1,2,3,4,5,6);
+        // 社員テーブルから現在の社員数を取得
+        $data = $this->Clients->find('all', [
+            'conditions'=>['del_flg = 0']
+            ]);
+        $list = array();
+        for($i = 1;$i <= ($data->count());$i++) {
+            array_push($list,$i);
+        }
+        // 並び順で有利不利の無いようシャッフルする
         shuffle($list);
         $this->set('list', $list);
     }
@@ -19,11 +31,11 @@ class PostsController extends AppController {
     	$data = $this->Posts->find('all');
     	$imgpath = $this->request->query('value') . '.jpg';
     	$person_no = $this->request->query('value');
-        $this->set('data', $data);
+    	$this->set('data', $data);
     	$this->set('imgpath', $imgpath);
     	$this->set('person_no', $person_no);
     	$this->set('entity', $this->Posts->newEntity());
-    }        
+    }
 
     public function addRecord() {
         //univ = $this->request->data('univ');
@@ -39,17 +51,20 @@ class PostsController extends AppController {
     	$this->Posts->save($record);
         return $this->redirect(['action' => 'complete']);
     	}
-    
+
 
     public function result() {
+        $client = $this->Clients->find('all', [
+            'conditions'=>['del_flg = 0']
+            ]);
         $data = $this->Posts->find('all');
         $count = array();
         $img = array();
-        for($i = 1;$i < 7;$i++) {
+        for($i = 1;$i <= ($client->count());$i++) {
             $check = $this->Posts->findAllByPerson_no($i);
             if($check != null) {
                 $count[$i] = $check->count();
-                $img[$i] = $check; 
+                $img[$i] = $check;
             }
         }
         $this->set('count', $count);
