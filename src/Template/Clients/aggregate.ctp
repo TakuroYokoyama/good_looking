@@ -50,13 +50,21 @@
        <canvas id="myChart" width="100px" height="500px"></canvas>
     </div>
     <div class="editArea">
-        <?= $this->Form->select( "dataFilter", $employeeData);?>
-        <?= $this->Form->create("detail",['url'=>['action'=>'detail', 'type'=>'post']]) ?>
-            <?= $this->Form->button('編集');?>
-        <?= $this->Form->end(); ?>
-        <?= $this->Form->create("detail",['url'=>['action'=>'detail', 'type'=>'post']]) ?>
-            <?= $this->Form->button('新規登録');?>
-        <?= $this->Form->end(); ?>
+        <ul>
+            <?= $this->Form->create("detail",['url'=>['action'=>'aggregate', 'type'=>'post']]) ?>
+            <li>
+                <?= $this->Form->select( "person_no", $employeeData);?>
+            </li>
+            <li>
+                <?= $this->Form->button('詳細');?>
+            </li>
+            <?= $this->Form->end(); ?>
+            <li>
+                <?= $this->Form->create("regist",['url'=>['action'=>'regist', 'type'=>'post']]) ?>
+                <?= $this->Form->button('新規登録');?>
+                <?= $this->Form->end(); ?>
+            </li>
+        </ul>
     </div>
 </body>
 <script>
