@@ -1,9 +1,9 @@
 <?php
 namespace App\Controller;
- 
+
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
- 
+
 class PostsController extends AppController {
 	public function initialize() {
         // postsテーブルとclientsテーブルを使用するためTableRegistryでインスタンスを作成する
@@ -38,12 +38,20 @@ class PostsController extends AppController {
     }
 
     public function addRecord() {
-    	if($this->request->is('post')) {
-    		$post = $this->Posts->newEntity($this->request->data);
-    		$this->Posts->save($post);
-            return $this->redirect(['action' => 'complete']);
+        //univ = $this->request->data('univ');
+       // $name_initial = $this->request->data('name_initial');
+        $record = $this->Posts->newEntity();//newEntityでテーブルの形。フォームから受け取った値。いま操作しているインスタンス。newEntityでテーブルの形。
+        $record->person_no = $this->request->data['person_no'];
+        $record->univ = $this->request->data['univ'];
+        $record->date = $this->request->data['date'];
+        $record->gender = $this->request->data['gender'];
+        $record->roc_x = $this->request->data['roc_x'];
+        $record->roc_y = $this->request->data['roc_y'];
+        $record->name_initial = $this->request->data['f_name'].'・'.$this->request->data['l_name'];
+    	$this->Posts->save($record);
+        return $this->redirect(['action' => 'complete']);
     	}
-    }
+
 
     public function result() {
         $client = $this->Clients->find('all', [
@@ -56,7 +64,7 @@ class PostsController extends AppController {
             $check = $this->Posts->findAllByPerson_no($i);
             if($check != null) {
                 $count[$i] = $check->count();
-                $img[$i] = $check; 
+                $img[$i] = $check;
             }
         }
         $this->set('count', $count);
