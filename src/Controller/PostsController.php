@@ -28,7 +28,14 @@ class PostsController extends AppController {
     public function addRecord() {
         //univ = $this->request->data('univ');
        // $name_initial = $this->request->data('name_initial');
-        $record = $this->Posts->newEntity($this->request->data);//newEntityでテーブルの形。フォームから受け取った値。いま操作しているインスタンス。newEntityでテーブルの形。
+        $record = $this->Posts->newEntity();//newEntityでテーブルの形。フォームから受け取った値。いま操作しているインスタンス。newEntityでテーブルの形。
+        $record->person_no = $this->request->data['person_no'];
+        $record->univ = $this->request->data['univ'];
+        $record->date = $this->request->data['date'];
+        $record->gender = $this->request->data['gender'];
+        $record->roc_x = $this->request->data['roc_x'];
+        $record->roc_y = $this->request->data['roc_y'];
+        $record->name_initial = $this->request->data['f_name'].'・'.$this->request->data['l_name'];
     	$this->Posts->save($record);
         return $this->redirect(['action' => 'complete']);
     	}
