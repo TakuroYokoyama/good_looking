@@ -174,19 +174,22 @@ class ClientsController extends AppController{
             $imgName = $post['person_no'].".jpg";
             move_uploaded_file($fileName,'img/'.$imgName);
             //編集画面に戻る
-            return  $this->redirect(['action' => 'regist']);
+            return  $this->redirect(['action' => 'aggregate']);
     	}
     }
 
      public function delEmployeeRecord() {
         if($this->request->is('post')) {
-            //レコード削除処理
-            $post = $this->Clients->newEntity($this->request->data);
-            $this->Clients->deleteAll(['person_no' => $post['person_no']]); 
+            //del_flg更新
+            $post = $this->request->getData();
+            $recode = $this->Clients->get($post['person_no']);
+            $recode = $this->Clients->patchEntity($recode, $post); 
+            $this->Clients->save($recode);        
+
             //画像削除処理
-            file_exists('img/'.$post['person_no']);
+            unlink('img/'.$post['person_no'].".jpg");
             //ログイン画面に戻る
-            return  $this->redirect(['action' => 'login']);
+            return  $this->redirect(['action' => 'aggregate']);
         }
     }
 
