@@ -137,8 +137,8 @@ class ClientsController extends AppController{
     public function regist()
     {    
         //社員情報の新規登録/編集分岐
-  		if($this->request->is('post')) {  
-            $person_no = $this->request->data('person_no');
+        $person_no = $this->request->data('person_no');
+  		if($person_no != null) {  
             $clientsData = $this->Clients->find()->where(['person_no' => $person_no])->first();
             //表示する文言を追加
             $title = "社員情報編集";
