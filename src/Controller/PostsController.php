@@ -19,8 +19,8 @@ class PostsController extends AppController {
             'conditions'=>['del_flg = 0']
             ]);
         $list = array();
-        for($i = 1;$i <= ($data->count());$i++) {
-            array_push($list,$i);
+        foreach ($data as $result) {
+            array_push($list, $result['person_no']);
         }
         // 並び順で有利不利の無いようシャッフルする
         shuffle($list);
