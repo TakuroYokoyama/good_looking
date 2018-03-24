@@ -186,8 +186,6 @@ class ClientsController extends AppController{
             $recode = $this->Clients->patchEntity($recode, $post); 
             $this->Clients->save($recode);        
 
-            //画像削除処理
-            unlink('img/'.$post['person_no'].".jpg");
             //ログイン画面に戻る
             return  $this->redirect(['action' => 'aggregate']);
         }
