@@ -4,6 +4,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
 <script src="/js/createGraph.js"></script>
 <link href="/css/nomalize.css" rel="stylesheet">
+<link href="/css/aggregate.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>グラフ</title>
 <script>
@@ -48,7 +49,6 @@
             ?>
         </div>
     <div class="graphArea">
-       <canvas id="myChart" width="100px" height="500px"></canvas>
     </div>
     <div class="editArea">
         <ul>
