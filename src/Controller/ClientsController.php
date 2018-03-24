@@ -178,7 +178,7 @@ class ClientsController extends AppController{
     	}
     }
 
-     public function delEmployeeRecord() {
+    public function delEmployeeRecord() {
         if($this->request->is('post')) {
             //レコード削除処理
             $post = $this->Clients->newEntity($this->request->data);
@@ -194,8 +194,7 @@ class ClientsController extends AppController{
         if($this->request->is('post')) {
             //社員番号取得
             $id = $this->request->data('person_no');
-         }
-         else{
+        } else {
             //不正アクセスの場合、ログイン画面に戻す
             return  $this->redirect(['action' => 'login']);
         }
@@ -204,10 +203,7 @@ class ClientsController extends AppController{
         $connection = ConnectionManager::get('default');
         $postsData = $connection->query('SELECT COUNT(*) AS votes FROM posts WHERE person_no = '.$id.';')->fetchAll('assoc');
 
-        //表示値をセット
-        $this->set('id', $clientsData['person_no']);
-        $this->set('name', $clientsData['name_initial']);
-        $this->set('return', $clientsData['press_return']);
+        $this->set('data', $clientsData);
         $this->set('vote', $postsData[0]['votes']);
         $this->set('entity', $this->Clients->newEntity());
     }
