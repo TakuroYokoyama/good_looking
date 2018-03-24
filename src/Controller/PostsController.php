@@ -14,14 +14,15 @@ class PostsController extends AppController {
 		$this->viewBuilder()->layout('post');
 	}
     public function index() {
-        // 社員テーブルから現在の社員数を取得
-        $data = $this->Clients->find('all', [
-            'conditions'=>['del_flg = 0']
-            ]);
+        // Clientsテーブルから現在の社員数(del_flg=0)を取得
+        $data = $this->Clients->findByDelFlg(0);
+
+        // person_noの配列を作成する
         $list = array();
         foreach ($data as $result) {
             array_push($list, $result['person_no']);
         }
+
         // 並び順で有利不利の無いようシャッフルする
         shuffle($list);
         $this->set('list', $list);
