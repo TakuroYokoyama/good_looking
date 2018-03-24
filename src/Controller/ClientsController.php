@@ -161,24 +161,72 @@ class ClientsController extends AppController{
   		$this->set('message', $msg);
         $this->set('title', $title);
         $this->set('pass', $pass);
+        $this->set('ErrMessage', NULL);
         $this->set('entity', $this->Clients->newEntity());
     }
 
     public function addEmployeeRecord() {
     	if($this->request->is('post')) {
             //登録新規登録・変更処理
-    		$post = $this->Clients->newEntity($this->request->data);
-    		$this->Clients->save($post);
+            try{
+                $post = $this->Clients->newEntity($this->request->data);
+                $this->Clients->save($post);
+                $msg = NULL;
+            }catch(\PDOException $e){
+                $msg = 'DB登録できませんでした';
+            }
             //画像保存処理
             $fileName = $post['UploadData']['tmp_name'];
             $imgName = $post['person_no'].".jpg";
             move_uploaded_file($fileName,'img/'.$imgName);
-            //編集画面に戻る
-            return  $this->redirect(['action' => 'aggregate']);
+
+            if($msg != null){
+                $this->set('ErrMessage', $msg);
+                $this->set('id', $post['person_no']);
+                $this->set('name', $post['name_initial']);
+                $this->set('message', "社員情報を入力してください");
+                $this->set('title', "社員情報登録");
+                $this->set('pass', NULL);
+                $this->set('entity', $this->Clients->newEntity());
+                $this->render('regist');
+            }else{
+                return  $this->redirect(['action' => 'aggregate']);
+            }
     	}
     }
 
-     public function delEmployeeRecord() {
+    public function editEmployeeRecord() {
+        if($this->request->is('post')) {
+            //登録新規登録・変更処理
+            try{
+                $post = $this->Clients->newEntity($this->request->data);
+                $this->Clients->save($post);
+                $msg = NULL;
+            }catch(\PDOException $e){
+                $msg = '編集できませんでした';
+            }
+            $this->log($post);
+            //画像保存処理
+            $fileName = $post['UploadData']['tmp_name'];
+            $imgName = $post['person_no'].".jpg";
+            move_uploaded_file($fileName,'img/'.$imgName);
+
+            if($msg != null){
+               $this->set('ErrMessage', $msg);
+                $this->set('id', $post['person_no']);
+                $this->set('name', $post['name_initial']);
+                $this->set('message', "社員情報を修正してください");
+                $this->set('title', "社員情報編集");
+                $this->set('pass', "<img src=/img/".$post['person_no'].".jpg>");
+                $this->set('entity', $this->Clients->newEntity());
+                $this->render('regist');
+            }else{
+                return  $this->redirect(['action' => 'aggregate']);
+            }
+        }
+    }
+
+    public function delEmployeeRecord() {
         if($this->request->is('post')) {
             //del_flg更新
             $post = $this->request->getData();

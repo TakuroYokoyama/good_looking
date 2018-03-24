@@ -10,6 +10,10 @@
     <div>
 		<?=$pass ?>
 	</div>
+	<?php 
+		if($ErrMessage != null)
+			echo $ErrMessage;
+	?>
 	<div>
 		<div>
 			<script>
@@ -20,9 +24,24 @@
 		        return flag;
 		    }
 			</script>
-	 		<?= $this->Form->create($entity, ['enctype' => 'multipart/form-data', 'type' => 'file', 'url' => ['action' => 'addEmployeeRecord'],'onsubmit'=>"return submitChkadd()"]) ?>
-	 		<?= $this->Form->input('person_no',array('id'=>'person_no','type'=>'number','label'=>'社員番号:','default' => $id)) ?>
-			<?= $this->Form->input('name_initial',array('id'=>'name_initial','type'=>'text','label'=>'イニシャル:','default' => $name)) ?>
+	 		<!-- <?= $this->Form->create($entity, ['enctype' => 'multipart/form-data', 'type' => 'file', 'url' => ['action' => 'addEmployeeRecord'],'onsubmit'=>"return submitChkadd()"])?> -->
+	 		<?php 
+	 		if($id == null){
+	 			echo $this->Form->create($entity, ['enctype' => 'multipart/form-data', 'type' => 'file', 'url' => ['action' => 'addEmployeeRecord'],'onsubmit'=>"return submitChkadd()"]);
+	 		}else{
+	 			echo $this->Form->create($entity, ['enctype' => 'multipart/form-data', 'type' => 'file', 'url' => ['action' => 'editEmployeeRecord'],'onsubmit'=>"return submitChkadd()"]);
+	 		}
+	 		?>
+	 		<?php 
+				if($id == null){
+	 				echo $this->Form->input('person_no',array('id'=>'person_no','type'=>'number','label'=>'社員番号:','default' => $id));
+				}else{
+					echo $this->Form->input('person_no',array('id'=>'person_no','type'=>'number','label'=>'社員番号:','default' => $id,'disabled'=>'disabled'));
+					echo $this->Form->hidden('person_no',array('id'=>'person_no','value'=>$id));
+				}
+	 		?>
+			<?= $this->Form->input('name_initial',array('id'=>'name_initial','type'=>'text','label'=>'イニシャル:','default' => $name,'required'=>'required')) ?>
+			<?= $this->Form->hidden('press_return',array('id'=>'press_return','value'=>'0')) ?>
 			<?= $this->Form->hidden('del_flg',array('id'=>'del_flg','value'=>'0')) ?>
 			<?= $this->Form->file('UploadData') ?>
 			<br>
