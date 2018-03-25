@@ -21,5 +21,10 @@
 		<?=$this->Form->button('編集する', array('class'=>'btn btn-danger center-block')) ?>
 		<?=$this->Form->end() ?>
 	</div>
+	<div>
+		<?=$this->Form->create('',['url'=>['action'=>'aggregate']]) ?>
+		<?=$this->Form->button('戻る',array('class'=>'btn btn-info center-block')) ?>
+		<?=$this->Form->end() ?>
+	</div>
 </body>
 </html>
