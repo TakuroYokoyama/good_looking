@@ -1,0 +1,23 @@
+.filterArea {
+	margin-top: 30px;
+}
+
+.graphArea {
+	position: relative;
+	padding: 15px;
+	overflow-x: scroll;
+	width: 1200px;
+}
+
+.graphView {
+	width: 100%;
+}
+
+.editArea ul {
+	list-style:none	;
+}
+
+.editArea li {
+	float: left;
+	padding: 5px;
+}

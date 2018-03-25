@@ -1,8 +1,9 @@
     function createGraph(labels, graphData){
         $("#myChart").remove();
-        $('.graphArea').append('<canvas id="myChart" width="100px" height="500px"></canvas>');
+        $('.graphArea').append('<canvas id="myChart"></canvas>');
         
         var ctx = document.getElementById("myChart").getContext('2d');
+        ctx.canvas.height = 500;
 
         var myChart = new Chart(ctx, {
             type: 'bar',
@@ -37,9 +38,17 @@
                         display: true,                //表示設定
                         barPercentage: 0.7,           //棒グラフ幅
                         ticks: {
-                            stepSize: 5,
+                            fontSize: 18,
                         },
                     }],
+                },
+                layout: {                             //レイアウト
+                    padding: {                          //余白設定
+                        left: 100,
+                        right: 50,
+                        top: 0,
+                        bottom: 0
+                    }
                 },
                 animation: false
                 

@@ -54,6 +54,7 @@ class ClientsController extends AppController{
                                             ON p.person_no = c.person_no
                                             GROUP BY p.person_no
                                             ORDER BY vote DESC;')->fetchAll('assoc');
+        $employeeResults = $connection->query('SELECT person_no,name_initial FROM clients;')->fetchAll('assoc');
 
         $labels = array();
         $graphDatas = array();
@@ -61,7 +62,9 @@ class ClientsController extends AppController{
         foreach ($results as $result) {
             array_push($labels, "\"".$result['name_initial']."\"");
             array_push($graphDatas, $result['vote']);
-            $employee += array($result['person_no'] => $result['name_initial']);
+        }
+        foreach ($employeeResults as $employeeResult) {
+            $employee += array($employeeResult['person_no'] => $employeeResult['name_initial']);
         }
 
         $labels = implode(",", $labels);
