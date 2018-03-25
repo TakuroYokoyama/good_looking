@@ -14,19 +14,19 @@ class ClientsController extends AppController{
     }
 
     public function index() {
-        //login画面にリダイレクトする(method名とctp名をあわせるため)  
+        //login画面にリダイレクトする(method名とctp名をあわせるため)
         return $this->redirect(['action' => "login"]);
     }
 
-    
+
     /**
     *    ログイン画面
     */
-    public function login() {  
+    public function login() {
         $id = $this->request->data('id');
         $pass = $this->request->data('pass');
         $connection = ConnectionManager::get('default');
-        
+
         //ログインできるユーザ・パスワードを固定
         $idAdmin = "administrator";
         $passAdmin = "admin";
@@ -44,16 +44,16 @@ class ClientsController extends AppController{
     /**
     *    グラフ画面
     */
-    public function aggregate() {  
+    public function aggregate() {
         $this->viewBuilder()->className('Aggregate');
 
         $connection = ConnectionManager::get('default');
         $results = $connection->query('SELECT c.name_initial, COUNT(*) as vote, c.person_no
-                                            FROM posts p 
-                                            INNER JOIN clients c 
-                                            ON p.person_no = c.person_no 
+                                            FROM posts p
+                                            INNER JOIN clients c
+                                            ON p.person_no = c.person_no
                                             GROUP BY p.person_no
-                                            ORDER BY vote DESC;')->fetchAll('assoc');    
+                                            ORDER BY vote DESC;')->fetchAll('assoc');
 
         $labels = array();
         $graphDatas = array();
@@ -84,34 +84,34 @@ class ClientsController extends AppController{
         if($sortType === 'desc'){
             $connection = ConnectionManager::get('default');
             $results = $connection->query('SELECT c.name_initial, COUNT(*) as vote
-                                            FROM posts p 
-                                            INNER JOIN clients c 
-                                            ON p.person_no = c.person_no 
+                                            FROM posts p
+                                            INNER JOIN clients c
+                                            ON p.person_no = c.person_no
                                             GROUP BY p.person_no
                                             ORDER BY vote DESC;')->fetchAll('assoc');
         } elseif($sortType === 'asc'){
             $connection = ConnectionManager::get('default');
-            $results = $connection->query('SELECT c.name_initial, COUNT(*) as vote 
-                                            FROM posts p 
-                                            INNER JOIN clients c 
-                                            ON p.person_no = c.person_no 
+            $results = $connection->query('SELECT c.name_initial, COUNT(*) as vote
+                                            FROM posts p
+                                            INNER JOIN clients c
+                                            ON p.person_no = c.person_no
                                             GROUP BY p.person_no
                                             ORDER BY vote ASC;')->fetchAll('assoc');
         } elseif($sortType === 'man'){
             $connection = ConnectionManager::get('default');
-            $results = $connection->query('SELECT p.id, p.gender, c.name_initial, COUNT(*) as vote 
-                                            FROM posts p 
-                                            INNER JOIN clients c 
-                                            ON p.person_no = c.person_no 
+            $results = $connection->query('SELECT p.id, p.gender, c.name_initial, COUNT(*) as vote
+                                            FROM posts p
+                                            INNER JOIN clients c
+                                            ON p.person_no = c.person_no
                                             WHERE gender = 0
                                             GROUP BY p.person_no
                                             ORDER BY vote DESC;')->fetchAll('assoc');
         } elseif($sortType === 'woman'){
             $connection = ConnectionManager::get('default');
-            $results = $connection->query('SELECT p.id, p.gender, c.name_initial, COUNT(*) as vote 
-                                            FROM posts p 
-                                            INNER JOIN clients c 
-                                            ON p.person_no = c.person_no 
+            $results = $connection->query('SELECT p.id, p.gender, c.name_initial, COUNT(*) as vote
+                                            FROM posts p
+                                            INNER JOIN clients c
+                                            ON p.person_no = c.person_no
                                             WHERE gender = 1
                                             GROUP BY p.person_no
                                             ORDER BY vote DESC;')->fetchAll('assoc');
@@ -135,10 +135,10 @@ class ClientsController extends AppController{
     }
 
     public function regist()
-    {    
+    {
         //社員情報の新規登録/編集分岐
-  		if($this->request->is('post')) {  
-            $person_no = $this->request->data('person_no');
+        $person_no = $this->request->data('person_no');
+  		if($person_no != null) {
             $clientsData = $this->Clients->find()->where(['person_no' => $person_no])->first();
             //表示する文言を追加
             $title = "社員情報編集";
@@ -148,7 +148,7 @@ class ClientsController extends AppController{
             $pass = "<img src=/img/".$id.".jpg>";
             $name = $clientsData['name_initial'];
         }
-        else{   
+        else{
             //表示する文言を追加
             $title = "社員情報登録";
             $msg = "社員情報を入力してください";
@@ -161,32 +161,81 @@ class ClientsController extends AppController{
   		$this->set('message', $msg);
         $this->set('title', $title);
         $this->set('pass', $pass);
+        $this->set('ErrMessage', NULL);
         $this->set('entity', $this->Clients->newEntity());
     }
 
     public function addEmployeeRecord() {
     	if($this->request->is('post')) {
             //登録新規登録・変更処理
-    		$post = $this->Clients->newEntity($this->request->data);
-    		$this->Clients->save($post);
+            try{
+                $post = $this->Clients->newEntity($this->request->data);
+                $this->Clients->save($post);
+                $msg = NULL;
+            }catch(\PDOException $e){
+                $msg = 'DB登録できませんでした';
+            }
             //画像保存処理
             $fileName = $post['UploadData']['tmp_name'];
             $imgName = $post['person_no'].".jpg";
             move_uploaded_file($fileName,'img/'.$imgName);
-            //編集画面に戻る
-            return  $this->redirect(['action' => 'regist']);
+
+            if($msg != null){
+                $this->set('ErrMessage', $msg);
+                $this->set('id', $post['person_no']);
+                $this->set('name', $post['name_initial']);
+                $this->set('message', "社員情報を入力してください");
+                $this->set('title', "社員情報登録");
+                $this->set('pass', NULL);
+                $this->set('entity', $this->Clients->newEntity());
+                $this->render('regist');
+            }else{
+                return  $this->redirect(['action' => 'aggregate']);
+            }
     	}
+    }
+
+    public function editEmployeeRecord() {
+        if($this->request->is('post')) {
+            //登録新規登録・変更処理
+            try{
+                $post = $this->Clients->newEntity($this->request->data);
+                $this->Clients->save($post);
+                $msg = NULL;
+            }catch(\PDOException $e){
+                $msg = '編集できませんでした';
+            }
+            $this->log($post);
+            //画像保存処理
+            $fileName = $post['UploadData']['tmp_name'];
+            $imgName = $post['person_no'].".jpg";
+            move_uploaded_file($fileName,'img/'.$imgName);
+
+            if($msg != null){
+               $this->set('ErrMessage', $msg);
+                $this->set('id', $post['person_no']);
+                $this->set('name', $post['name_initial']);
+                $this->set('message', "社員情報を修正してください");
+                $this->set('title', "社員情報編集");
+                $this->set('pass', "<img src=/img/".$post['person_no'].".jpg>");
+                $this->set('entity', $this->Clients->newEntity());
+                $this->render('regist');
+            }else{
+                return  $this->redirect(['action' => 'aggregate']);
+            }
+        }
     }
 
     public function delEmployeeRecord() {
         if($this->request->is('post')) {
-            //レコード削除処理
-            $post = $this->Clients->newEntity($this->request->data);
-            $this->Clients->deleteAll(['person_no' => $post['person_no']]); 
-            //画像削除処理
-            file_exists('img/'.$post['person_no']);
+            //del_flg更新
+            $post = $this->request->getData();
+            $recode = $this->Clients->get($post['person_no']);
+            $recode = $this->Clients->patchEntity($recode, $post);
+            $this->Clients->save($recode);
+
             //ログイン画面に戻る
-            return  $this->redirect(['action' => 'login']);
+            return  $this->redirect(['action' => 'aggregate']);
         }
     }
 
