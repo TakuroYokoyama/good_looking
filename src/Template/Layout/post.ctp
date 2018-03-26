@@ -20,7 +20,9 @@
 </head>
 <body>
 	<div id="container">
-		<div id="header"></div>
+		<div id="header">
+			<?=$this->Html->image('logo.png', array('id'=>'title_logo')); ?>
+		</div>
 	</div>
 	<div id="content">
 		<?=$this->fetch('content') ?>

@@ -3,7 +3,6 @@
 */
 
 body {
-	background-image: url("/img/paper_bk.jpg");
 	margin: 10px 0px;
 }
 
@@ -45,16 +44,7 @@ index.ctp
 一覧ページ
 */
 
-.logo_frame {
-	background-image: url("/img/frame_logo.jpg");
-	background-size: cover;
-	width: 1140px;
-	height: 330px;
-}
-
 .index_img {
-	background-image: url("/img/frame.jpg");
-	background-size: cover;
 	padding: 40px;
 	width: 300px;
 	height: 480px;
@@ -66,8 +56,6 @@ vote.ctp
 */
 
 .vote_img {
-	background-image: url("/img/frame.jpg");
-	background-size: cover;
 	padding: 40px;
 	margin: auto;
 	width: 380px;
