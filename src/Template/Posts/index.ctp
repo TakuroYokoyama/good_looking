@@ -2,7 +2,6 @@
 	<?php
 	$i = 0;
 	foreach ($list as $obj): $i++; ?>
-		<? $equal = "%3D" ?>
 		<div class="index_img">
 			<?=$this->Html->image("$obj.jpg", [
 				'url' => ['controller' => 'Posts', 'action' => 'vote?value='.$obj]
