@@ -1,3 +1,10 @@
+.footerArea{
+	padding-top: 6px;
+	width: 100%;
+	height: 30px;
+	background: #d1d3d6;
+}
+
 .filterArea {
 	margin-top: 30px;
 }
