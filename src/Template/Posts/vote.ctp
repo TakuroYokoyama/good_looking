@@ -4,7 +4,7 @@
 </div>
 </div>
 <div class="vote_bottom" align= "center" >
-	<?=$this->Form->create($entity,['url'=>['action'=>'addRecord']]) ?>
+	<?=$this->Form->create('',['url'=>['action'=>'addRecord']]) ?>
 	<?=$this->Form->hidden('person_no',array('id'=>'person_no', 'value'=>$person_no)) ?>
 	<br>
 	<p>あなたのイニシャル・性別・学校名を入力してください</p>
@@ -28,8 +28,6 @@
 		echo $this->Form->radio('gender',$options,array('legend' => false,'default' => '0'));
 		?>
 		<p>学校名:<?=$this->Form->text('univ', array('id'=>'univ', 'required aria-required'=>'true', 'errormessage'=>'学校名を入力して下さい。')) ?></p>
-		<?php $date = date("Y/m/d H:i:s"); ?>
-		<?=$this->Form->hidden('date', array('id'=>'date', 'value'=>$date)) ?>
 		<?=$this->Form->hidden('roc_x', array('id'=>'roc_x', 'value'=>'0')) ?>
 		<?=$this->Form->hidden('roc_y', array('id'=>'roc_y', 'value'=>'0')) ?>
 		<?=$this->Form->button('投票する！', array('class'=>'btn btn-danger center-block')) ?>

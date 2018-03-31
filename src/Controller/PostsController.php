@@ -31,33 +31,30 @@ class PostsController extends AppController {
     }
 
     public function vote() {
-    	$data = $this->Posts->find('all');
         $person_no = $this->request->query('value');
     	$imgpath = $person_no. '.jpg';
-    	$this->set('data', $data);
     	$this->set('imgpath', $imgpath);
     	$this->set('person_no', $person_no);
-    	$this->set('entity', $this->Posts->newEntity());
     }
 
     public function addRecord() {
         $record = $this->Posts->newEntity();
         $record->person_no = $this->request->data['person_no'];
-        $record->univ = h($this->request->data['univ']);
-        $record->date = $this->request->data['date'];
-        $record->gender = $this->request->data['gender'];
         $record->roc_x = $this->request->data['roc_x'];
         $record->roc_y = $this->request->data['roc_y'];
         $record->name_initial = $this->request->data['f_name'].'・'.$this->request->data['l_name'];
+        $record->univ = h($this->request->data['univ']);
+        $record->gender = $this->request->data['gender'];
+        $record->date = date("Y/m/d H:i:s");
+        
     	try {
             $this->Posts->save($record);
             return $this->redirect(['action' => 'complete']);
-        } catch (Exception $e) {
+        } catch (PDOException $e) {
             $this->Flash->error('あれれ〜？登録できないよ〜？（コナン君風に）'. $e->getMessage());
             return $this->redirect(['action' => 'index']);
-        }
+        } 
     }
-
 
     public function result() {
         $client = $this->Clients->find('all', [
