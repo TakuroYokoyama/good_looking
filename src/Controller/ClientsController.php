@@ -139,43 +139,32 @@ class ClientsController extends AppController{
 
     public function regist()
     {
+        $clientsData = $this->clients->newEntity();
         //社員情報の新規登録/編集分岐
-        $person_no = $this->request->data('person_no');
-  		if($person_no != null) {
-            $clientsData = $this->Clients->find()->where(['person_no' => $person_no])->first();
+  		if($person_no = $this->request->data('person_no')) {
+            $clientsData = $this->Clients->findByPersonNo($person_no);
             //表示する文言を追加
-            $title = "社員情報編集";
-            $msg = "社員情報を修正してください";
-            //画像表示用
-            $id = $clientsData['person_no'];
-            $pass = "<img src=/img/".$id.".jpg>";
-            $name = $clientsData['name_initial'];
-        }
-        else{
+            $this->set('title', "社員情報編集");
+            $this->set('message', "社員情報を修正してください");
+        } else {
+
             //表示する文言を追加
             $title = "社員情報登録";
-            $msg = "社員情報を入力してください";
-            $id = NULL;
-            $pass = "";
-            $name = NULL;
+            $this->set('message', "社員情報を入力してください");
+            
         }
-        $this->set('id', $id);
-        $this->set('name', $name);
-  		$this->set('message', $msg);
-        $this->set('title', $title);
-        $this->set('pass', $pass);
+        $this->set('data', $clientsData);
         $this->set('ErrMessage', NULL);
-        $this->set('entity', $this->Clients->newEntity());
     }
 
     public function addEmployeeRecord() {
     	if($this->request->is('post')) {
             //登録新規登録・変更処理
-            try{
+            try {
                 $post = $this->Clients->newEntity($this->request->data);
                 $this->Clients->save($post);
                 $msg = NULL;
-            }catch(\PDOException $e){
+            } catch(\PDOException $e) {
                 $msg = 'DB登録できませんでした';
             }
             //画像保存処理
@@ -183,7 +172,7 @@ class ClientsController extends AppController{
             $imgName = $post['person_no'].".jpg";
             move_uploaded_file($fileName,'img/'.$imgName);
 
-            if($msg != null){
+            if($msg != null) {
                 $this->set('ErrMessage', $msg);
                 $this->set('id', $post['person_no']);
                 $this->set('name', $post['name_initial']);
@@ -192,8 +181,8 @@ class ClientsController extends AppController{
                 $this->set('pass', NULL);
                 $this->set('entity', $this->Clients->newEntity());
                 $this->render('regist');
-            }else{
-                return  $this->redirect(['action' => 'aggregate']);
+            } else {
+                return $this->redirect(['action' => 'aggregate']);
             }
     	}
     }
@@ -201,11 +190,11 @@ class ClientsController extends AppController{
     public function editEmployeeRecord() {
         if($this->request->is('post')) {
             //登録新規登録・変更処理
-            try{
+            try {
                 $post = $this->Clients->newEntity($this->request->data);
                 $this->Clients->save($post);
                 $msg = NULL;
-            }catch(\PDOException $e){
+            } catch(\PDOException $e) {
                 $msg = '編集できませんでした';
             }
             $this->log($post);
@@ -214,7 +203,7 @@ class ClientsController extends AppController{
             $imgName = $post['person_no'].".jpg";
             move_uploaded_file($fileName,'img/'.$imgName);
 
-            if($msg != null){
+            if($msg != null) {
                $this->set('ErrMessage', $msg);
                 $this->set('id', $post['person_no']);
                 $this->set('name', $post['name_initial']);
@@ -223,8 +212,8 @@ class ClientsController extends AppController{
                 $this->set('pass', "<img src=/img/".$post['person_no'].".jpg>");
                 $this->set('entity', $this->Clients->newEntity());
                 $this->render('regist');
-            }else{
-                return  $this->redirect(['action' => 'aggregate']);
+            } else {
+                return $this->redirect(['action' => 'aggregate']);
             }
         }
     }
@@ -238,7 +227,7 @@ class ClientsController extends AppController{
             $this->Clients->save($recode);
 
             //ログイン画面に戻る
-            return  $this->redirect(['action' => 'aggregate']);
+            return $this->redirect(['action' => 'aggregate']);
         }
     }
 
@@ -248,7 +237,7 @@ class ClientsController extends AppController{
             $id = $this->request->data('person_no');
         } else {
             //不正アクセスの場合、ログイン画面に戻す
-            return  $this->redirect(['action' => 'login']);
+            return $this->redirect(['action' => 'login']);
         }
         //社員情報取得
         $clientsData = $this->Clients->find()->where(['person_no' => $id])->first();
