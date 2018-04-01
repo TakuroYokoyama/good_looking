@@ -139,7 +139,7 @@ class ClientsController extends AppController{
 
     public function regist()
     {
-        $clientsData = $this->clients->newEntity();
+        $clientsData = $this->Clients->newEntity();
         //社員情報の新規登録/編集分岐
   		if($person_no = $this->request->data('person_no')) {
             $clientsData = $this->Clients->findByPersonNo($person_no);
