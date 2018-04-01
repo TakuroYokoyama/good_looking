@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use \Exception;
 
 class PostsController extends AppController {
 	public function initialize() {
@@ -12,6 +13,7 @@ class PostsController extends AppController {
         $this->Clients = TableRegistry::get('clients');
 		$this->viewBuilder()->autoLayout(true);
 		$this->viewBuilder()->layout('post');
+        $this->loadComponent('Flash');
 	}
     public function index() {
         // Clientsテーブルから現在の社員数(del_flg=0)を取得
@@ -29,30 +31,30 @@ class PostsController extends AppController {
     }
 
     public function vote() {
-    	$data = $this->Posts->find('all');
-    	$imgpath = $this->request->query('value') . '.jpg';
-    	$person_no = $this->request->query('value');
-    	$this->set('data', $data);
+        $person_no = $this->request->query('value');
+    	$imgpath = $person_no. '.jpg';
     	$this->set('imgpath', $imgpath);
     	$this->set('person_no', $person_no);
-    	$this->set('entity', $this->Posts->newEntity());
     }
 
     public function addRecord() {
-        //univ = $this->request->data('univ');
-       // $name_initial = $this->request->data('name_initial');
-        $record = $this->Posts->newEntity();//newEntityでテーブルの形。フォームから受け取った値。いま操作しているインスタンス。newEntityでテーブルの形。
+        $record = $this->Posts->newEntity();
         $record->person_no = $this->request->data['person_no'];
-        $record->univ = $this->request->data['univ'];
-        $record->date = $this->request->data['date'];
-        $record->gender = $this->request->data['gender'];
         $record->roc_x = $this->request->data['roc_x'];
         $record->roc_y = $this->request->data['roc_y'];
         $record->name_initial = $this->request->data['f_name'].'・'.$this->request->data['l_name'];
-    	$this->Posts->save($record);
-        return $this->redirect(['action' => 'complete']);
-    	}
-
+        $record->univ = h($this->request->data['univ']);
+        $record->gender = $this->request->data['gender'];
+        $record->date = date("Y/m/d H:i:s");
+        
+    	try {
+            $this->Posts->save($record);
+            return $this->redirect(['action' => 'complete']);
+        } catch (PDOException $e) {
+            $this->Flash->error('あれれ〜？登録できないよ〜？（コナン君風に）'. $e->getMessage());
+            return $this->redirect(['action' => 'index']);
+        } 
+    }
 
     public function result() {
         $client = $this->Clients->find('all', [

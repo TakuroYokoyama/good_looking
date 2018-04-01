@@ -3,7 +3,6 @@
 */
 
 body {
-	background-image: url("/img/paper_bk.jpg");
 	margin: 10px 0px;
 }
 
@@ -13,9 +12,8 @@ body {
 	margin: 10px;
 }
 
-#content {
+#content p {
 	color: #999;
-	padding: 10px 25px 30px 25px;
 	font-size: 14pt;
 }
 
@@ -40,24 +38,66 @@ button {
 	margin-top :20px;
 }
 
+/* cake.cssよりFlash errorのスタイルを借用 */
+div.message {
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    font-weight: normal;
+    padding: 0 1.5rem 0 1.5rem;
+    transition: height 300ms ease-out 0s;
+    background-color: #a0d3e8;
+    color: #626262;
+    top: 15px;
+    right: 15px;
+    z-index: 999;
+    overflow: hidden;
+    height: 50px;
+    line-height: 2.5em;
+    box-radius: 5px;
+}
+
+div.message:before {
+    line-height: 0px;
+    font-size: 20px;
+    height: 12px;
+    width: 12px;
+    border-radius: 15px;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+    left: -11px;
+    background-color: #FFF;
+    padding: 12px 14px 12px 10px;
+    content: "i";
+    color: #a0d3e8;
+}
+
+div.message.error {
+    background-color: #C3232D;
+    color: #FFF;
+}
+
+div.message.error:before {
+    padding: 11px 16px 14px 7px;
+    color: #C3232D;
+    content: "x";
+}
+
+div.message.hidden {
+    height: 0;
+}
+
 /*
 index.ctp
 一覧ページ
 */
 
-.logo_frame {
-	background-image: url("/img/frame_logo.jpg");
-	background-size: cover;
-	width: 1140px;
-	height: 330px;
-}
-
-.index_img {
-	background-image: url("/img/frame.jpg");
-	background-size: cover;
-	padding: 40px;
-	width: 300px;
-	height: 480px;
+.index_img img{
+	width: 100px;
+	height: 160px;
+	margin: 10px 10px;
 }
 
 /*
@@ -66,8 +106,6 @@ vote.ctp
 */
 
 .vote_img {
-	background-image: url("/img/frame.jpg");
-	background-size: cover;
 	padding: 40px;
 	margin: auto;
 	width: 380px;

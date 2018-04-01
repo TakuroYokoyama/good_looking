@@ -1,27 +1,10 @@
 <div class="wrapper">
-	<div class="logo_frame">
-		<?=$this->Html->image('logo.gif', array('class'=>'center-block')); ?>
+	<p>投票したい人を選んでください</p>
+	<div class="index_img">
+	<?php foreach($list as $obj): ?>
+			<?=$this->Html->image("$obj.jpg", [
+				'url' => ['controller' => 'Posts', 'action' => 'vote?value='.$obj]
+				]); ?>
+	<?php endforeach; ?>
 	</div>
-	<h2></h2>
-	<table>
-		<tbody>
-			<?php
-			$i = 0;
-			foreach ($list as $obj):
-			$i++; ?>
-			<?php
-			if((($i + 3) % 3) == 1 ) {
-				echo "<tr>";
-			}; ?>
-				<td class="index_img">
-					<a href=/posts/vote?value=<?=$obj ?>> <img src=/img/<?=$obj ?>.jpg>
-				</td>
-			<?php
-			if((($i % 3) == 0) || ($obj === end($list))) {
-				echo "</tr>";
-			};
-			?>
-			<?php endforeach; ?>
-		</tbody>
-	</table>
 </div>
