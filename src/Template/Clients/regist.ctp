@@ -8,13 +8,8 @@
     <h3><?= $title ?></h3>
     <p><?= $message ?></p>
     <div>
-		<!--<img src=/img/.jpg> -->
+		<img src=/img/<?= $data->person_no ?>.jpg>
 	</div>
-	<p>
-	<?php
-		 print_r($data);
-	 ?>
-	 </p>
 	<?php 
 		if($ErrMessage != null)
 			echo $ErrMessage;
@@ -31,21 +26,21 @@
 			</script>
 	 		<!-- <?= $this->Form->create($entity, ['enctype' => 'multipart/form-data', 'type' => 'file', 'url' => ['action' => 'addEmployeeRecord'],'onsubmit'=>"return submitChkadd()"])?> -->
 	 		<?php 
-	 		if($id == null){
+	 		if($data == null){
 	 			echo $this->Form->create($entity, ['enctype' => 'multipart/form-data', 'type' => 'file', 'url' => ['action' => 'addEmployeeRecord'],'onsubmit'=>"return submitChkadd()"]);
 	 		}else{
 	 			echo $this->Form->create($entity, ['enctype' => 'multipart/form-data', 'type' => 'file', 'url' => ['action' => 'editEmployeeRecord'],'onsubmit'=>"return submitChkadd()"]);
 	 		}
 	 		?>
 	 		<?php 
-				if($id == null){
+				if($data == null){
 	 				echo $this->Form->input('person_no',array('id'=>'person_no','type'=>'number','label'=>'社員番号:','default' => $data->person_no));
 				}else{
 					echo $this->Form->input('person_no',array('id'=>'person_no','type'=>'number','label'=>'社員番号:','default' => $data->person_no, 'disabled'=>'disabled'));
-					echo $this->Form->hidden('person_no',array('id'=>'person_no','value'=>$id));
+					echo $this->Form->hidden('person_no',array('id'=>'person_no','value'=>$data->person_no));
 				}
 	 		?>
-			<?= $this->Form->input('name_initial',array('id'=>'name_initial','type'=>'text','label'=>'イニシャル:','default' => $name,'required'=>'required')) ?>
+			<?= $this->Form->input('name_initial',array('id'=>'name_initial','type'=>'text','label'=>'イニシャル:','default' => $data->name_initial,'required'=>'required')) ?>
 			<?= $this->Form->hidden('press_return',array('id'=>'press_return','value'=>'0')) ?>
 			<?= $this->Form->hidden('del_flg',array('id'=>'del_flg','value'=>'0')) ?>
 			<?= $this->Form->file('UploadData') ?>
@@ -64,7 +59,7 @@
 		    }
 		    </script>
 			<?php
-				if($id != null){
+				if($data != null){
 			 		echo $this->Form->create($entity, ['enctype' => 'multipart/form-data','type' => 'file', 'url' => ['action' => 'delEmployeeRecord'],'onsubmit'=>"return submitChkdel()"]); 
 			 		echo $this->Form->hidden('person_no',array('id'=>'person_no','value'=> $data->person_no));
 			 		echo $this->Form->hidden('del_flg',array('id'=>'del_flg','value'=> 1));

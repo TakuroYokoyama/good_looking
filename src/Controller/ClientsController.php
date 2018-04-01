@@ -142,7 +142,7 @@ class ClientsController extends AppController{
         $clientsData = $this->Clients->newEntity();
         //社員情報の新規登録/編集分岐
   		if($person_no = $this->request->data('person_no')) {
-            $clientsData = $this->Clients->findByPersonNo($person_no);
+            $clientsData = $this->Clients->find()->where(['person_no' => $person_no])->first();
             //表示する文言を追加
             $this->set('title', "社員情報編集");
             $this->set('message', "社員情報を修正してください");
@@ -155,6 +155,7 @@ class ClientsController extends AppController{
         }
         $this->set('data', $clientsData);
         $this->set('ErrMessage', NULL);
+        $this->set('entity', $this->Clients->newEntity());
     }
 
     public function addEmployeeRecord() {
